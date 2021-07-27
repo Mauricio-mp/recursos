@@ -246,3 +246,85 @@ Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos
     at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
     at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
 > git config --get commit.template
+> git status -z -u
+> git show :views/login.view.tpl
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git for-each-ref --format %(refname:short)%00%(upstream:short) refs/heads
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git checkout -q master
+error: Your local changes to the following files would be overwritten by checkout:
+	~/.vscode-root/Cache/index-dir/the-real-index
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/configuration-ec98740c369a870bd9c61e9a2343da3c.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/extension-83975eb54972af702ec3e8e45bfb6efa.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/foldingRange-efd7da7487388e868c126796d2a1a422.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/implementation-96531d717d9a83c337052045df96b8f2.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/index-ea0b00fb50920caf3959535d2c38a36f.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/uuid-75412e8f63893afdb2c690f481592f68.code
+	~/.vscode-root/GPUCache/data_1
+	~/.vscode-root/User/workspaceStorage/657381942c1dcd8617323733294efe43/state.vscdb
+	~/.vscode-root/logs/20210727T122141/exthost1/output_logging_20210727T122246/1-Git.log
+Please commit your changes or stash them before you switch branches.
+Aborting
+> git for-each-ref --format %(refname:short)%00%(upstream:short) refs/heads
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git checkout -q develop
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :views/login.view.tpl
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git checkout -q master
+error: Your local changes to the following files would be overwritten by checkout:
+	~/.vscode-root/Cache/index-dir/the-real-index
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/configuration-ec98740c369a870bd9c61e9a2343da3c.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/extension-83975eb54972af702ec3e8e45bfb6efa.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/foldingRange-efd7da7487388e868c126796d2a1a422.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/implementation-96531d717d9a83c337052045df96b8f2.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/index-ea0b00fb50920caf3959535d2c38a36f.code
+	~/.vscode-root/CachedData/26076a4de974ead31f97692a0d32f90d735645c0/uuid-75412e8f63893afdb2c690f481592f68.code
+	~/.vscode-root/GPUCache/data_1
+	~/.vscode-root/User/workspaceStorage/657381942c1dcd8617323733294efe43/state.vscdb
+	~/.vscode-root/logs/20210727T122141/exthost1/output_logging_20210727T122246/1-Git.log
+Please commit your changes or stash them before you switch branches.
+Aborting
