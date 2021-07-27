@@ -67,7 +67,6 @@
                       <div class="space-6"></div>
                       
                     <form method="post" action="index.php?page=login" id="form_login">
-                      <h1>holalalala</h1>
                         <fieldset>
                           <label class="block clearfix">
                             <span class="block input-icon input-icon-right">
