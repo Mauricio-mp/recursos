@@ -292,7 +292,7 @@ function mostrarhistorial($CodigoEmpleado, $fechaInicio,$fechaFinal){
 ConexionSQLRecursosHumanos();
 
 
-	$query=mssql_query("SELECT a.cPermisoId, b.cPeriodo, a.fDesde, a.fHasta, a.iDias,a.iHorasDiarias,a.cMotivo FROM PR_PermisoH a,PR_Permisos b WHERE b.cPermisoId =a.cPermisoId and b.cPersonaId='$CodigoEmpleado' and a.fDesde between '$fechaInicio' and '$fechaFinal'");
+	$query=mssql_query("SELECT a.cPermisoId, b.cPeriodo, a.fDesde, a.fHasta, a.iDias,a.iHorasDiarias,a.cMotivo FROM PR_PermisoH a,PR_Permisos b WHERE b.cPermisoId =a.cPermisoId and b.cPersonaId='$CodigoEmpleado' and a.fDesde between '$fechaInicio' and '$fechaFinal' and a.Estado =1 and b.Estado =1");
 	while ($dato=mssql_fetch_array($query)) {
 		$dato['fDesde']=date('d/m/Y',strtotime($dato['fDesde']));
 		$dato['fHasta']=date('d/m/Y',strtotime($dato['fHasta']));
