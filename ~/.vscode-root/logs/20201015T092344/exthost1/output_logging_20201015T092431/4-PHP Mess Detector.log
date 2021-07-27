@@ -1,0 +1,130 @@
+[Info  - 9:24:31 AM] Language server connection initialized.
+[Info  - 9:24:31 AM] Setting workspaceFolders [{"uri":"file:///var/www/html/recursos","name":"recursos"}].
+[Info  - 9:24:33 AM] Configuration change triggerd, validating all open documents.
+[Info  - 9:24:33 AM] Created controller with settings '{"enabled":true,"command":"php /root/.vscode/extensions/ecodes.vscode-phpmd-1.2.0/phpmd/phpmd.phar","rules":"cleancode,codesize,controversial,design,unusedcode,naming","verbose":false,"clearOnClose":true}' and environment '{"workspaceFolders":[{"uri":"file:///var/www/html/recursos","name":"recursos"}],"homeDir":"/root"}'
+[Info  - 9:24:33 AM] New document opened, starting validation.
+[Info  - 9:24:39 AM] Document validation after open completed successfully
+[Info  - 12:41:20 PM] New document opened, starting validation.
+[Info  - 12:41:26 PM] Document validation after open completed successfully
+[Info  - 12:42:21 PM] Document saved, starting validation.
+[Info  - 12:42:22 PM] Document validation after save completed successfully
+[Info  - 12:43:54 PM] Document saved, starting validation.
+[Info  - 12:43:57 PM] Document validation after save completed successfully
+[Info  - 12:44:01 PM] Document saved, starting validation.
+[Info  - 12:44:04 PM] Document validation after save completed successfully
+[Info  - 12:44:04 PM] Document saved, starting validation.
+[Info  - 12:44:05 PM] Document validation after save completed successfully
+[Info  - 12:44:10 PM] Document saved, starting validation.
+[Info  - 12:44:13 PM] Document validation after save completed successfully
+[Info  - 12:44:44 PM] Document saved, starting validation.
+[Info  - 12:44:52 PM] Document validation after save completed successfully
+[Info  - 12:44:56 PM] Document saved, starting validation.
+[Info  - 12:45:01 PM] Document validation after save completed successfully
+[Info  - 12:45:03 PM] Document saved, starting validation.
+[Info  - 12:45:06 PM] Document saved, starting validation.
+[Info  - 12:45:06 PM] Document validation after save completed successfully
+[Info  - 12:45:08 PM] Document validation after save completed successfully
+[Info  - 12:46:05 PM] Document saved, starting validation.
+[Info  - 12:46:06 PM] Document validation after save completed successfully
+[Info  - 12:46:21 PM] Document saved, starting validation.
+[Info  - 12:46:22 PM] Document validation after save completed successfully
+[Info  - 12:46:27 PM] Document saved, starting validation.
+[Info  - 12:46:28 PM] Document validation after save completed successfully
+[Info  - 12:46:34 PM] Document saved, starting validation.
+[Info  - 12:46:36 PM] Document validation after save completed successfully
+[Info  - 12:46:39 PM] Document saved, starting validation.
+[Info  - 12:46:41 PM] Document validation after save completed successfully
+[Info  - 12:46:41 PM] Document saved, starting validation.
+[Info  - 12:46:43 PM] Document saved, starting validation.
+[Info  - 12:46:47 PM] Document validation after save completed successfully
+[Info  - 12:46:47 PM] Document validation after save completed successfully
+[Info  - 12:46:54 PM] Document saved, starting validation.
+[Info  - 12:46:57 PM] Document validation after save completed successfully
+[Info  - 12:47:09 PM] Document saved, starting validation.
+[Info  - 12:47:10 PM] Document validation after save completed successfully
+[Info  - 1:00:38 PM] New document opened, starting validation.
+[Info  - 1:00:43 PM] Document validation after open completed successfully
+[Info  - 1:00:58 PM] Document saved, starting validation.
+[Info  - 1:01:05 PM] Document saved, starting validation.
+[Info  - 1:01:06 PM] Document validation after save completed successfully
+[Info  - 1:01:07 PM] Document validation after save completed successfully
+[Info  - 1:01:10 PM] Document saved, starting validation.
+[Info  - 1:01:14 PM] Document validation after save completed successfully
+[Info  - 1:01:15 PM] Document saved, starting validation.
+[Info  - 1:01:18 PM] Document saved, starting validation.
+[Info  - 1:01:21 PM] Document validation after save completed successfully
+[Info  - 1:01:23 PM] Document saved, starting validation.
+[Info  - 1:01:23 PM] Document validation after save completed successfully
+[Info  - 1:01:28 PM] Document validation after save completed successfully
+[Info  - 1:26:41 PM] Document saved, starting validation.
+[Info  - 1:26:48 PM] Document validation after save completed successfully
+[Info  - 1:26:54 PM] Document saved, starting validation.
+[Info  - 1:26:59 PM] Document validation after save completed successfully
+[Info  - 1:27:01 PM] Document saved, starting validation.
+[Info  - 1:27:03 PM] Document validation after save completed successfully
+[Info  - 1:27:20 PM] Document saved, starting validation.
+[Info  - 1:27:24 PM] Document validation after save completed successfully
+[Info  - 1:27:25 PM] Document saved, starting validation.
+[Info  - 1:27:28 PM] Document validation after save completed successfully
+[Info  - 1:27:33 PM] Document saved, starting validation.
+[Info  - 1:27:35 PM] Document validation after save completed successfully
+[Info  - 1:27:36 PM] Document saved, starting validation.
+[Info  - 1:27:40 PM] Document validation after save completed successfully
+[Info  - 1:27:50 PM] Document saved, starting validation.
+[Info  - 1:27:52 PM] Document validation after save completed successfully
+[Info  - 1:27:52 PM] Document saved, starting validation.
+[Info  - 1:27:54 PM] Document validation after save completed successfully
+[Info  - 1:27:55 PM] Document saved, starting validation.
+[Info  - 1:27:56 PM] Document validation after save completed successfully
+[Info  - 1:28:08 PM] Document saved, starting validation.
+[Info  - 1:28:11 PM] Document saved, starting validation.
+[Info  - 1:28:16 PM] Document validation after save completed successfully
+[Info  - 1:28:16 PM] Document validation after save completed successfully
+[Info  - 1:28:19 PM] Document saved, starting validation.
+[Info  - 1:28:20 PM] Document validation after save completed successfully
+[Info  - 1:28:39 PM] Document saved, starting validation.
+[Info  - 1:28:40 PM] Document validation after save completed successfully
+[Info  - 1:28:53 PM] Document saved, starting validation.
+[Info  - 1:28:55 PM] Document validation after save completed successfully
+[Info  - 1:29:07 PM] Document saved, starting validation.
+[Info  - 1:29:08 PM] Document validation after save completed successfully
+[Info  - 1:29:20 PM] Document saved, starting validation.
+[Info  - 1:29:30 PM] Document validation after save completed successfully
+[Info  - 1:29:58 PM] Document saved, starting validation.
+[Info  - 1:30:00 PM] Document validation after save completed successfully
+[Info  - 1:30:01 PM] Document saved, starting validation.
+[Info  - 1:30:03 PM] Document validation after save completed successfully
+[Info  - 1:30:07 PM] Document saved, starting validation.
+[Info  - 1:30:09 PM] Document validation after save completed successfully
+[Info  - 1:30:22 PM] Document saved, starting validation.
+[Info  - 1:30:26 PM] Document validation after save completed successfully
+[Info  - 1:30:32 PM] Document saved, starting validation.
+[Info  - 1:30:34 PM] Document saved, starting validation.
+[Info  - 1:30:40 PM] Document validation after save completed successfully
+[Info  - 1:30:40 PM] Document validation after save completed successfully
+[Info  - 1:30:45 PM] Document saved, starting validation.
+[Info  - 1:30:47 PM] Document validation after save completed successfully
+[Info  - 1:30:52 PM] Document saved, starting validation.
+[Info  - 1:30:54 PM] Document validation after save completed successfully
+[Info  - 1:33:58 PM] Document closed, clearing messages.
+[Info  - 1:33:58 PM] Clearing diagnostics for file:///var/www/html/recursos/models/ReporteGECOMP.model.php
+[Info  - 1:34:22 PM] Document saved, starting validation.
+[Info  - 1:34:24 PM] Document validation after save completed successfully
+[Info  - 1:35:21 PM] Document saved, starting validation.
+[Info  - 1:35:22 PM] Document validation after save completed successfully
+[Info  - 1:35:31 PM] Document saved, starting validation.
+[Info  - 1:35:34 PM] Document validation after save completed successfully
+[Info  - 1:35:54 PM] Document saved, starting validation.
+[Info  - 1:35:56 PM] Document validation after save completed successfully
+[Info  - 1:36:00 PM] Document saved, starting validation.
+[Info  - 1:36:00 PM] Document validation after save completed successfully
+[Info  - 1:36:03 PM] Document saved, starting validation.
+[Info  - 1:36:05 PM] Document validation after save completed successfully
+[Info  - 1:36:10 PM] Document saved, starting validation.
+[Info  - 1:36:12 PM] Document validation after save completed successfully
+[Info  - 1:36:15 PM] Document saved, starting validation.
+[Info  - 1:36:19 PM] Document validation after save completed successfully
+[Info  - 1:36:19 PM] New document opened, starting validation.
+[Info  - 1:36:21 PM] Document validation after open completed successfully
+[Info  - 1:36:25 PM] Document closed, clearing messages.
+[Info  - 1:36:25 PM] Clearing diagnostics for file:///var/www/html/recursos/models/Usuario.model.php

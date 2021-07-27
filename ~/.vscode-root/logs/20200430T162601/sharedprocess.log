@@ -1,0 +1,32 @@
+[2020-04-30 16:26:19.717] [sharedprocess] [info] main {"machineId":"88231b71b76e8913cb4b1a55b2e271a99ba0a48e59a1ebe1870072a413e89980","windowId":2}
+[2020-04-30 16:26:42.996] [sharedprocess] [info] Installing extension: devsense.phptools-vscode
+[2020-04-30 16:26:43.004] [sharedprocess] [info] Installing extension: junstyle.php-cs-fixer
+[2020-04-30 16:26:43.005] [sharedprocess] [info] Installing extension: small.php-ci
+[2020-04-30 16:26:48.157] [sharedprocess] [info] Downloaded extension: small.php-ci /tmp/ec652467-c118-40f0-97b3-bae6ebe8c659
+[2020-04-30 16:26:48.716] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.small.php-ci-0.3.9: small.php-ci
+[2020-04-30 16:26:48.717] [sharedprocess] [info] Renamed to /root/.vscode/extensions/small.php-ci-0.3.9
+[2020-04-30 16:26:48.717] [sharedprocess] [info] Installation completed. small.php-ci
+[2020-04-30 16:26:48.722] [sharedprocess] [info] Extensions installed successfully: small.php-ci
+[2020-04-30 16:26:52.704] [sharedprocess] [info] Downloaded extension: junstyle.php-cs-fixer /tmp/cd5f70eb-d889-4678-8fad-496f0e4ef37f
+[2020-04-30 16:26:53.099] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.junstyle.php-cs-fixer-0.1.151: junstyle.php-cs-fixer
+[2020-04-30 16:26:53.099] [sharedprocess] [info] Renamed to /root/.vscode/extensions/junstyle.php-cs-fixer-0.1.151
+[2020-04-30 16:26:53.100] [sharedprocess] [info] Installation completed. junstyle.php-cs-fixer
+[2020-04-30 16:26:53.102] [sharedprocess] [info] Extensions installed successfully: junstyle.php-cs-fixer
+[2020-04-30 16:26:59.675] [sharedprocess] [info] Starting to clean up unused language packs.
+[2020-04-30 16:28:01.549] [sharedprocess] [info] Downloaded extension: devsense.phptools-vscode /tmp/7cfe5116-8118-4910-bac5-e1d549d91ad0
+[2020-04-30 16:28:11.734] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.devsense.phptools-vscode-1.0.4608: devsense.phptools-vscode
+[2020-04-30 16:28:11.735] [sharedprocess] [info] Renamed to /root/.vscode/extensions/devsense.phptools-vscode-1.0.4608
+[2020-04-30 16:28:11.737] [sharedprocess] [info] Installation completed. devsense.phptools-vscode
+[2020-04-30 16:28:11.745] [sharedprocess] [info] Extensions installed successfully: devsense.phptools-vscode
+[2020-05-24 17:01:23.986] [sharedprocess] [info] Installing extension: devsense.phptools-vscode
+[2020-05-24 17:01:23.987] [sharedprocess] [info] Installing extension: junstyle.php-cs-fixer
+[2020-05-24 17:01:36.309] [sharedprocess] [info] Downloaded extension: junstyle.php-cs-fixer /tmp/7f769b18-37fa-41f3-9901-ccc9aa73f57b
+[2020-05-24 17:01:36.418] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.junstyle.php-cs-fixer-0.1.153: junstyle.php-cs-fixer
+[2020-05-24 17:01:36.419] [sharedprocess] [info] Renamed to /root/.vscode/extensions/junstyle.php-cs-fixer-0.1.153
+[2020-05-24 17:01:36.422] [sharedprocess] [info] Installation completed. junstyle.php-cs-fixer
+[2020-05-24 17:01:36.426] [sharedprocess] [info] Extensions installed successfully: junstyle.php-cs-fixer
+[2020-05-24 17:03:08.159] [sharedprocess] [info] Downloaded extension: devsense.phptools-vscode /tmp/8478219f-b5a9-4697-9411-5a2faa2f41b4
+[2020-05-24 17:03:13.814] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.devsense.phptools-vscode-1.0.4666: devsense.phptools-vscode
+[2020-05-24 17:03:13.814] [sharedprocess] [info] Renamed to /root/.vscode/extensions/devsense.phptools-vscode-1.0.4666
+[2020-05-24 17:03:13.815] [sharedprocess] [info] Installation completed. devsense.phptools-vscode
+[2020-05-24 17:03:13.823] [sharedprocess] [info] Extensions installed successfully: devsense.phptools-vscode
