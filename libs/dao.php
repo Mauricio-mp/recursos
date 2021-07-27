@@ -15,7 +15,6 @@ if (!$connect || !mssql_select_db('RecursosHumanos', $connect)) {
    }
    
    }
-
    function ConexionSQLserver(){
      $server = '172.17.0.152:1433';
     $username='sa';
