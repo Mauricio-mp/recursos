@@ -1,5 +1,5 @@
 {
     "files.autoSave": "afterDelay",
     "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
-    "php-cs-fixer.lastDownload": 1603808270504
+    "php-cs-fixer.lastDownload": 1627413932884
 }

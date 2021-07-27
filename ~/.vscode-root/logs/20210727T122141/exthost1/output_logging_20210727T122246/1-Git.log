@@ -1,0 +1,248 @@
+Looking for git in: git
+Using git 2.20.1 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /var/www/html/proyecto/recursos
+> git status -z -u
+> git check-ignore -v -z --stdin
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git for-each-ref --format %(refname:short)%00%(upstream:short) refs/heads
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git checkout -q --track origin/develop
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :index.php
+> git status -z -u
+> git show :views/login.view.tpl
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git check-ignore -v -z --stdin
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git show HEAD:views/login.view.tpl
+> git checkout -q master
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git show :index.php
+> git show HEAD:views/login.view.tpl
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/master'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
+> git show :views/login.view.tpl
+> git status -z -u
+> git show :index.php
+> git show :views/login.view.tpl
+> git symbolic-ref --short HEAD
+> git rev-parse develop
+> git rev-parse --symbolic-full-name develop@{u}
+> git rev-list --left-right develop...refs/remotes/origin/develop
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/var/www/html/proyecto/recursos/.git/refs/remotes/origin/develop'
+    at FSWatcher.start (internal/fs/watchers.js:165:26)
+    at Object.watch (fs.js:1270:11)
+    at Object.t.watch (/usr/share/code/resources/app/extensions/git/dist/main.js:1:591308)
+    at E.updateTransientWatchers (/usr/share/code/resources/app/extensions/git/dist/main.js:1:123004)
+    at l.fire (/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:46:913)
+    at T.updateModelState (/usr/share/code/resources/app/extensions/git/dist/main.js:1:141789)
+> git config --get commit.template
