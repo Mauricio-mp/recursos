@@ -152,7 +152,7 @@ function editarDias($periodo){
    
     $sql=mssql_query("SELECT iDisponibilidad FROM PR_Permisos where cPermisoId ='$periodo' ");
     if($row=mssql_fetch_array($sql)){
-        $row['disponibilidad']= $row['iDisponibilidad'];
+        $row['disponibilidad']= round($row['iDisponibilidad']);
         
         $arr[]=$row; 
         

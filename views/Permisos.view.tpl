@@ -806,7 +806,7 @@
                                                                 <input type="text" name="diasvacaciones" id="diasvacaciones" > <br>
                                                                 
                                                                 <button type="button" onclick="guardarNuevosDias()" name="" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar Cambios</button> &nbsp;&nbsp;&nbsp;
-                                                                <button type="button" onclick="retoceder()" class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
+                                                                <button type="button" onclick="retocederDias()" class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
                                                                 
             
                                                             </form>
@@ -845,7 +845,7 @@
                                                            
                                                         </div>
                                                         <center style="display:none" id="MOtrarBotonRetroceso">
-                                                            <button type="button" onclick="retoceder()" class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
+                                                            <button type="button" onclick="retocederDias()" class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
                                                         </center>
 
                                                         
@@ -921,7 +921,7 @@
 
 
                                                                 <div class="card-body card-block">
-                                                                    <form action="#" method="post" class="form-inline" id="idlist">
+                                                                    <form action="#" method="post" class="form-inline" >
                                                                         <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label>
                                                                             <div id="idlist">
                                                                                 <select id="ListarPeriodoEmpleado" class="form-control">
@@ -969,7 +969,7 @@
                                                                     <form action="#" method="post" class="form-inline" id="idlist">
                                                                         <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label>
                                                                             <div id="idlist">
-                                                                                <select id="ListarPeriodoEmpleado" class="form-control">
+                                                                                <select id="ListarPeriodoEmpleado1" class="form-control">
                                                                                     <option value="0" selected value="0" disabled="">Selecione una opcion</option>
                                                                                     <option value="1" value="1">Un Periodo</option>
                                                                                     <option value="2" value="2">Varios Periodos</option>
@@ -1375,18 +1375,17 @@
                    
                    $('#tablaPeriodo').hide();
                    $('.DivDias').show();   
-                   alert(periodo);  
+                  
                    
 
                    
-
                    $.post("index.php?page=Permisos", {
                                    periodo: periodo,
                                    op: "verDias"
                                }, function(htmlexterno) {
                 var json = JSON.parse(htmlexterno);
 
-                $('#diasvacaciones').val(json[0]['iDisponibilidad']);
+                $('#diasvacaciones').val(json[0]['disponibilidad']);
 
 
                     })
@@ -1407,7 +1406,10 @@
                 nuevodia:nuevodia
                 }, function(response) {
                     if(response==0 ){
-                        toastr.success("Dias Actualizado con exito ")
+                        toastr.success("Dias Actualizado con exito ");
+                        $('#tablaPeriodo').load('index.php?page=Permisos #tablaPeriodo');
+                        $('.DivDias').hide();   
+                        $('#tablaPeriodo').show();
                     }else{
                         toastr.error(" su dias solo pueden ser mayor a los disponible ");
                     }
@@ -1727,6 +1729,13 @@
 
                         $('#tablaPermisos td').remove();
 
+                    }
+                    function retocederDias() {
+                        $('#tablaPeriodo').show();
+                        $('#tablaPermisos').hide();
+                        $('#MOtrarBotonRetroceso').hide();
+
+                        $('.DivDias').hide();  
                     }
 
                     function editarPermisos(mot, desde, hasta) {
