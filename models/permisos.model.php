@@ -167,7 +167,7 @@ function editarDiasvacaciones($nuevodia,$periodo){
     $sql1=mssql_query("SELECT SUM(iDias) as dia FROM dbo.PR_PermisoH WHERE cPermisoId= '$periodo'");
     if($row=mssql_fetch_array($sql1)) {
         $row['dia']=round($row['dia']);
-        if($nuevodia<= $row['dia']) {
+        if($nuevodia< $row['dia']) {
             return 1;
         }else {
     
