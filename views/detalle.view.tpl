@@ -281,8 +281,12 @@
                                             <td>{{fHasta}}</td>
                                             <td>{{iDias}}</td>
                                             <td>{{iHorasDiarias}}</td>
-                                            <td>{{cMotivo}}</td>
+                                            <td>{{cMotivo}}</td>  
                                             <td>{{cPeriodo}}</td>
+                                            
+                                            
+                                            
+                                            
                                         </tr>
                                         {{endfor historial}} 
                                     </tbody>

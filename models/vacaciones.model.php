@@ -6,7 +6,8 @@ function mostrarTabla(){
 	$query= mssql_query("SELECT * FROM GN_Persona");
 	while($dato= mssql_fetch_array($query)){
 		$dato['cNombres']=utf8_encode($dato['cNombres']);
-	    $dato["cApellidos"]=utf8_encode($dato["cApellidos"]);
+		$dato["cApellidos"]=utf8_encode($dato["cApellidos"]);
+		$dato["cPersonaId"]=utf8_encode($dato["cPersonaId"]);
 									
 	$msg[]=$dato;
 
@@ -21,6 +22,11 @@ ConexionSQLRecursosHumanos();
 	while ($dato=mssql_fetch_array($query)) {
 		$dato['fDesde']=date('d/m/Y',strtotime($dato['fDesde']));
 		$dato['fHasta']=date('d/m/Y',strtotime($dato['fHasta']));
+		if($dato['cPeriodo']=='1111 - 1111'){
+			$dato['cPeriodo']='PERIODO DE PRUEBA';
+		}
+			
+		
 		$msg[]=$dato;
 	}
 // and cPermisoId IN (SELECT cPermisoId FROM PR_Permisos WHERE cPersonaId='$CodigoEmpleado')

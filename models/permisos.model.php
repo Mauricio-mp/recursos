@@ -82,7 +82,7 @@ function GetPermisosDetalle($permiso,$fecha,$fecha2){
     $fecha=date('Y-m-d',strtotime($fecha));
     $fecha2=date('Y-m-d',strtotime($fecha2));
     
-    $sql=mssql_query("SELECT cPermisoId,cMotivo,fDesde,fHasta,iDias FROM PR_PermisoH WHERE cPermisoId='$permiso' and fDesde='$fecha' and fHasta='$fecha2' and Estado=1");
+    $sql=mssql_query("SELECT cPermisoId,cMotivo,fDesde,fHasta,iDias,cObservaciones FROM PR_PermisoH WHERE cPermisoId='$permiso' and fDesde='$fecha' and fHasta='$fecha2' and Estado=1");
 
     if($row=mssql_fetch_array($sql)){
        
@@ -96,11 +96,13 @@ function GetPermisosDetalle($permiso,$fecha,$fecha2){
         $row['Mot']=$row['cMotivo'];
         $row['Desde']=$row['fDesde'];
         $row['Hasta']=$row['fHasta'];
+        $row['observaciones']=$row['cObservaciones'];
 
         $row['fDesde']=date("Y-m-d",strtotime($row['fDesde']));
         $row['fHasta']=date("Y-m-d",strtotime($row['fHasta']));
         $row['dias']=number_format($row['iDias'],-1);
         $row['cPermisoId']= $row['cPermisoId'];
+        
         $row['num']=mssql_num_rows($sql);
         $arr[]=$row;
 
@@ -108,8 +110,12 @@ function GetPermisosDetalle($permiso,$fecha,$fecha2){
 
     return $arr;
 }
+
+
+
 function GetPermisos($Permiso){
     ConexionSQLRecursosHumanos();
+    
 
     $sql=mssql_query("SELECT cPermisoId,cMotivo,fDesde,fHasta,iDias FROM PR_PermisoH WHERE cPermisoId='$Permiso' and Estado=1");
 
@@ -125,6 +131,7 @@ function GetPermisos($Permiso){
         $row['Mot']=$row['cMotivo'];
         $row['Desde']=$row['fDesde'];
         $row['Hasta']=$row['fHasta'];
+       
 
         $row['fDesde']=date("d/m/Y",strtotime($row['fDesde']));
         $row['fHasta']=date("d/m/Y",strtotime($row['fHasta']));
@@ -139,10 +146,56 @@ function GetPermisos($Permiso){
 
 
 }
-function EditarPermiso($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin,$Motivo){
+
+function editarDias($periodo){
+    ConexionSQLRecursosHumanos();
+   
+    $sql=mssql_query("SELECT iDisponibilidad FROM PR_Permisos where cPermisoId ='$periodo' ");
+    if($row=mssql_fetch_array($sql)){
+        $row['disponibilidad']= $row['iDisponibilidad'];
+        
+        $arr[]=$row; 
+        
+    }
+    return $arr; 
+    
+}
+
+function editarDiasvacaciones($nuevodia,$periodo){
+    ConexionSQLRecursosHumanos();
+   
+    $sql1=mssql_query("select iDisponibilidad from dbo.PR_Permisos WHERE  cPermisoId= '$periodo'");
+    if($row=mssql_fetch_array($sql1)) {
+        $row['disponibilidad']= $row['iDisponibilidad'];
+    } if($nuevodia<$row['disponibilidad'] ) {
+        return 1;
+    }else {
+
+    
+   
+
+
+    $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
+
+    if($sql==true){
+        return 0;
+    }else{
+       return 1;
+    }
+    }
+}
+
+function EditarPermiso($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin,$Motivo,$Observacion){
 $dias=ValidarDiasHabiles($nuevaFechaInicio,$nuevafechaFin);
 
-     $sql=mssql_query("UPDATE RecursosHumanos.dbo.PR_PermisoH SET fDesde='$nuevaFechaInicio', fHasta='$nuevafechaFin', iDias='$dias', cMotivo='$Motivo' WHERE cPermisoId='$Periodo' AND fDesde='$fechaInicio' and fHasta='$fechaFin' AND Estado=1");
+     $sql=mssql_query("UPDATE RecursosHumanos.dbo.PR_PermisoH SET 
+     fDesde='$nuevaFechaInicio', 
+     fHasta='$nuevafechaFin', 
+     iDias='$dias', 
+     cMotivo='$Motivo',
+     cObservaciones='$Observacion' 
+     
+     WHERE cPermisoId='$Periodo' AND fDesde='$fechaInicio' and fHasta='$fechaFin' AND Estado=1");
      $recalculo=recalculo($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin);
      if($sql==true){
         $sql2=mssql_query("UPDATE RecursosHumanos.dbo.PR_Permisos SET iDisponibilidad='$recalculo' WHERE cPermisoId='$Periodo' AND Estado=1");
@@ -991,7 +1044,7 @@ $total=0;
        function ActualizarContra($anterior,$nueva,$verificar,$usuario,$key){
         ConexionSQLserver();
          if($nueva != $verificar){
-           return 'Error. No coinciden las Constraseñas';
+           return 'Error. No coinciden las Constraseï¿½as';
          }else{
         $Clave=encriptar($verificar);
         $sql=mssql_query("UPDATE R_Usuarios SET Contrasenia='$Clave' WHERE CodEmpleado='$usuario'");

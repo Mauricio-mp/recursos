@@ -402,6 +402,8 @@
                                                 <a class="nav-item nav-link" id="nav-BorarPeriodo-tab" data-toggle="tab" href="#nav-BorarPeriodo" role="tab" aria-controls="nav-BorarPeriodo" aria-selected="false">Eliminar Periodo</a>
                                                 <a class="nav-item nav-link" id="nav-BorarPermiso-tab" data-toggle="tab" href="#nav-BorarPermiso" role="tab" aria-controls="nav-BorarPermiso" aria-selected="false">Eliminar Permiso</a>
                                                 <a class="nav-item nav-link" id="nav-feriados-tab" data-toggle="tab" href="#nav-feriados" role="tab" aria-controls="nav-feriados" aria-selected="false">Dias feriados</a>
+                                                <a class="nav-item nav-link" id="nav-vacaciones-tab" data-toggle="tab" href="#nav-vacaciones" role="tab" aria-controls="nav-vacaciones" aria-selected="false">Informe de Vacaciones</a>
+                                                
 
                                             </div>
                                         </nav>
@@ -582,8 +584,7 @@
                                                             </div>
                                                             <div id="mostrarOpcion" class="col-sm-4" style="display: none">
                                                                 <input type="number" name="Dias" id="dias" class="form-control">
-                                                            </div>
-
+                                                            </div>  
                                                             <div id="errorHolder"></div>
 
                                                             <button type="button" id="btn" name="btn" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar</button>
@@ -608,7 +609,9 @@
                                                     <div class="card-body card-block">
                                                         <div id="cardModificarpermisos">
                                                             <form action="index.php?page=Permisos" method="post" enctype="multipart/form-data" class="form-horizontal" id="">
+                                                                
                                                                 <div class="row form-group">
+                                                                    
                                                                     <div class="col col-md-3"><label for="text-input" class=" form-control-label">Dias</label></div>
                                                                     <div class="col-12 col-md-9"> <input id='NuevaHora' class="form-control" type='text' name='Horas' disabled/><small id="" class="form-text text-muted"></small></div>
 
@@ -634,14 +637,13 @@
 
                                                                 <div class="row form-group">
                                                                     <div class="col col-md-3"><label for="text-input" class=" form-control-label">Motivo</label></div>
-                                                                    <div class="col-12 col-md-9"> <select id="nuevoMotivo" class="form-control"></select><small id="" class="form-text text-muted"></small></div>
+                                                                    <div class="col-12 col-md-9"> <select id="nuevoMotivo" class="form-control"></select><small id="" class="form-text text-muted"></div>
 
-
-
-                                                                </div>
-
-
-
+                                                                    </div>
+                                                                        <div class="row form-group">
+                                                                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Observaciones</label></div>
+                                                                            <div class="col-12 col-md-9"><textarea name="NuevaObservacion" id="NuevaObservacion" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                                                                        </div>
 
                                                                 <!-- <div class="row form-group">
                                                                                  <div class="col col-md-3"><label for="select" class=" form-control-label">Motivo de Permiso o Licencia</label></div>
@@ -773,6 +775,8 @@
                                                                     <th scope="col">Licencia</th>
                                                                     <th scope="col">Periodo </th>
                                                                     <th scope="col">Disponible</th>
+                                                                    <th scope="col">Opciones</th>
+                                                                    
 
                                                                 </tr>
                                                             </thead>
@@ -782,6 +786,7 @@
                                                                     <td scope="row"><button type="button" onclick="HistoricoPeriodo('{{PeriodoId}}')" class="btn btn-link btn-sm "><span class="ti-search">&nbsp; {{Tipo}}</span></button></td>
                                                                     <td>{{Periodo}}</td>
                                                                     <td>{{disponible}}</td>
+                                                                    <td scope="row"><button type="button" onclick="EditarDias('{{PeriodoId}}')" class="btn btn-warning btn-sm">EDITAR</button></td>
 
                                                                 </tr>
                                                                 {{endfor datosPermiso}}
@@ -794,6 +799,20 @@
                                                             {{endif mmm}}
 
                                                         </div>
+
+                                                        <div class="DivDias" style="display: none;">
+                                                            <form action="" >
+                                                                <label for="">Dias</label>
+                                                                <input type="text" name="diasvacaciones" id="diasvacaciones" > <br>
+                                                                
+                                                                <button type="button" onclick="guardarNuevosDias()" name="" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar Cambios</button> &nbsp;&nbsp;&nbsp;
+                                                                <button type="button" onclick="retoceder()" class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
+                                                                
+            
+                                                            </form>
+
+                                                        </div>
+                                                        
                                                         <div>
                                                             <table class="table table-striped " id="tablaPermisos" width="50%" height="300px" style="display: none;">
 
@@ -823,14 +842,24 @@
 
 
                                                             </table>
+                                                           
                                                         </div>
                                                         <center style="display:none" id="MOtrarBotonRetroceso">
                                                             <button type="button" onclick="retoceder()" class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
                                                         </center>
+
+                                                        
                                                     </div>
+
+                                                  
+                                                    
 
 
                                                 </div>
+
+                                                 
+
+                                                
                                             </div>
                                             <!-- FIN PERMISO-->
 
@@ -920,22 +949,45 @@
 
                                                             </div>
 
-
-
-
-
-
-
-
-
-
-
+                                                            
+                                    
                                                         </form>
                                                     </div>
 
                                                 </div>
                                             </div>
                                             <!-- FIN BORAR PERMISO-->
+
+
+                                            <!-- INICIO DE REPORTE DE VACACIONES-->
+                                            <div class="tab-pane fade" id="nav-vacaciones" role="tabpanel" aria-labelledby="nav-vacaciones-tab">
+                                                <div class="row form-group">
+                                                    <div class="card-body card-block">
+                                                        <form action="index.php?page=Periodo" method="post" enctype="multipart/form-data" class="form-horizontal" id="">
+                                                            <div class="row form-group">
+                                                                <div class="card-body card-block">
+                                                                    <form action="#" method="post" class="form-inline" id="idlist">
+                                                                        <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label>
+                                                                            <div id="idlist">
+                                                                                <select id="ListarPeriodoEmpleado" class="form-control">
+                                                                                    <option value="0" selected value="0" disabled="">Selecione una opcion</option>
+                                                                                    <option value="1" value="1">Un Periodo</option>
+                                                                                    <option value="2" value="2">Varios Periodos</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>   
+                                                                        <center>
+                                                                            <button type="button" id="BtnGuardarAnularPermiso" class="btn btn-primary btn-lg btn-block">Aceptar</button>
+                                                                        </center>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- FIN DE REPORTE DE VACACIONES-->
 
                                         </div>
 
@@ -1050,6 +1102,10 @@
                         $('#MOtrarBotonRetroceso').show();
                         $('#cardModificarpermisos').hide();
                     });
+
+                   
+                    
+                    
                     $('#BtnNuevaContra').click(function() {
                         var anteriorpsq = $('#pswAnterior').val();
                         var nuevapsq = $('#pswNueva').val();
@@ -1256,7 +1312,7 @@
                         $('#num10').attr('checked', false);
                         $('#num20').attr('checked', false);
                         $('#num15').attr('checked', false);
-                        $('#num25').attr('checked', false);
+                        $('#num25').attr('chMensajedeEditarecked', false);
                     });
                     $("#boxtext input[name='chkTexto']").click(function(event) {
                         if ($('input:checkbox[name=chkTexto]:checked').val() == 'on') {
@@ -1315,7 +1371,52 @@
                             $("#tablaFeriados").load("index.php?page=Permisos #tablaFeriados");
                         });
                     }
+                    function EditarDias(periodo) {
+                   
+                   $('#tablaPeriodo').hide();
+                   $('.DivDias').show();   
+                   alert(periodo);  
+                   
 
+                   
+
+                   $.post("index.php?page=Permisos", {
+                                   periodo: periodo,
+                                   op: "verDias"
+                               }, function(htmlexterno) {
+                var json = JSON.parse(htmlexterno);
+
+                $('#diasvacaciones').val(json[0]['iDisponibilidad']);
+
+
+                    })
+                              
+                   
+
+                   
+                  }
+
+                function guardarNuevosDias(periodo) {
+                var nuevodia =$('#diasvacaciones').val();
+                
+
+              
+                $.post("index.php?page=Permisos", {
+                op: "Modificardias",
+                periodo: periodo,
+                nuevodia:nuevodia
+                }, function(response) {
+                    if(response==0 ){
+                        toastr.success("Dias Actualizado con exito ")
+                    }else{
+                        toastr.error(" su dias solo pueden ser mayor a los disponible ");
+                    }
+                    
+
+            
+                 });
+
+            }
                     function BtnFeriado() {
                         var feriado = $('#FechaFeriado').val();
                         var observacion = $('#ObservacionFeriado').val();
@@ -1605,6 +1706,9 @@
 
 
                     }
+                
+
+                    
 
                     function encode(str) {
                         var encoded = "";
@@ -1648,6 +1752,10 @@
                             periodo: periodo,
                             fecha1: fecha1,
                             fecha2: fecha2
+                            
+                            
+                            
+                            
                         }, function(htmlexterno) {
 
 
@@ -1658,6 +1766,7 @@
                             $('#NuevaFecha1').val(json[0]['fDesde']);
                             $('#NuevaFecha2').val(json[0]['fHasta']);
                             $('#nuevoMotivo').append('<option>Vacaciones</option><option>Salud</option><option>Duelo</option><option>Estudios</option><option>Personal</option><option>Nupcias</option>');
+                            $('#NuevaObservacion').val(json[0]['observaciones']);
 
                         });
 
@@ -1665,18 +1774,21 @@
 
 
                     }
+                    
 
                     function guardarNuevoPermiso() {
 
                         var fecha_inicio = $('#NuevaFecha1').val();
                         var fecha_fin = $('#NuevaFecha2').val();
                         var Motivo = $('#nuevoMotivo').val();
+                        var Observacion =$('#NuevaObservacion').val();
 
                         $.post("index.php?page=Permisos", {
                             op: "ModificarPermisos",
                             fechaInicio: fecha_inicio,
                             fechaFin: fecha_fin,
-                            Motivo: Motivo
+                            Motivo: Motivo,
+                            Observacion:Observacion
                         }, function(response) {
 
                             MensajedeEditar(response);

@@ -22,7 +22,7 @@ $tipoPermiso=TipoPermiso();
 $opcion=$_POST['txtopcion'];
 $valor=$_POST['txtvalor'];
 
-  $cuenta["Tipo"]=optenertipo();    
+$cuenta["Tipo"]=optenertipo();    
   $cuenta["Periodo"]=optener_periodo();   
   $cuenta["Motivo"]=optener_motivo();
 $cuenta["peiodo1"]=$tipoPermiso[0];
@@ -95,7 +95,22 @@ $cuenta["nombres"]=$_SESSION['logeo'];
       //Devolvemos el array pasado a JSON como objeto
       echo $datos;
       break;
+case 'verDias':
+  $idEmpleado=$_POST['periodo'];
+  $_SESSION['DiasPeriodo']=$idEmpleado;
+  $datosempleado=editarDias($idEmpleado);
 
+  echo json_encode($datosempleado, JSON_FORCE_OBJECT);
+  break;
+
+  case 'Modificardias':
+    $nuevodia=$_POST['nuevodia'];
+    $periodo=$_SESSION['DiasPeriodo'];
+
+
+    echo editarDiasvacaciones($nuevodia,$periodo);
+  break;
+  
       case 'BorrarPermisos':
         $permisoId=$_POST['permisoId'];
         $periodoId=$_POST['periodoId'];
@@ -243,11 +258,13 @@ $cuenta["nombres"]=$_SESSION['logeo'];
     $Permiso=EncriptacionPeriodos($_POST['periodo']);
     $fecha1=EncriptacionPeriodos($_POST['fecha1']);
     $fecha2=EncriptacionPeriodos($_POST['fecha2']);
+
     
     $GetPermisoDEtalle=GetPermisosDetalle($Permiso,$fecha1,$fecha2);
     $_SESSION['periodo_sesion']=$Permiso;
     $_SESSION['fecha1_sesion']=$fecha1;
     $_SESSION['fecha2_sesion']=$fecha2;
+  
   
      
 
@@ -266,8 +283,10 @@ $cuenta["nombres"]=$_SESSION['logeo'];
     $nuevafechaFin=$_POST['fechaFin'];
     $fechaInicio=$_SESSION['fecha1_sesion'];
     $fechaFin=$_SESSION['fecha2_sesion'];
+    $Observacion=$_POST['Observacion'];
+    
 
-    echo EditarPermiso($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin,$Motivo);
+    echo EditarPermiso($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin,$Motivo,$Observacion);
 
 
   break;

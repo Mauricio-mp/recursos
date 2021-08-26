@@ -238,9 +238,8 @@
                     <table id="bootstrap-data-table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th class="center">
-                                    Nombre
-                                </th>
+                                <th>Identidad</th>
+                                <th class="center">Nombre</th>
                                 <th>Apellido</th>
                                 <th>Accion</th>
 
@@ -255,6 +254,9 @@
 
 
                             <tr>
+
+                                
+                                <td>{{cPersonaId}}</td>
                                 <td>{{cNombres}}</td>
                                 <td>{{cApellidos}}</td>
                                 <div style="text-align: center">

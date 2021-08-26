@@ -91,6 +91,7 @@
                     <li class="" style="background-color:#E8B540 ">
                         <a style="font-size:13px; color: black; font-weight: bold;" href="index.php?page=home"><i class="menu-icon fa fa-laptop"></i>Inicio </a>
                     </li>
+
                     {{if Empleados}}
                     <li class="menu-item-has-children dropdown " style="background-color:#E8B540; ">
 
@@ -134,6 +135,7 @@
                     </li>
                     {{endif Indemnizacion}} {{if Reportes}}
                     <li style=" font-size:13px; color: black; font-weight: bold;" class="menu-title">Reporteria</li>
+                    
                     <!-- /.menu-title -->
 
                     <li class="menu-title"></li>
@@ -146,7 +148,7 @@
                         <ul class="sub-menu children dropdown-menu" style="background-color:rgba(10, 255, 112, 0.01)">
 
 
-
+                            
                             {{if ReporteHistorialEmpleado}}
                             <li><i style="color:black" class="fa fa-list"></i><a style=" color: black; font-weight: bold;font-size:13px; " href="index.php?page=Inicio">&nbsp; Historial Empleado</a></li>
                             {{endif ReporteHistorialEmpleado}} {{if ReporteHistorialVacaciones}}
