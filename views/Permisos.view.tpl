@@ -969,7 +969,14 @@
                                                                     <form action="#" method="post" class="form-inline" id="idlist">
                                                                         <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label>
                                                                             <div id="idlist">
-                                                                                <select id="ListarPeriodoEmpleado1" class="form-control">
+                                                                                <select id="ListarPeriodoEmpleado1" onchange="CambioPeriodo()" class="form-control">
+                                                                                    <option value="0" selected value="0" disabled="">Selecione una opcion</option>
+                                                                                    <option value="1" value="1">Un Periodo</option>
+                                                                                    <option value="2" value="2">Varios Periodos</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div id="idlistunico" style="display: none;">
+                                                                                <select class="form-control">
                                                                                     <option value="0" selected value="0" disabled="">Selecione una opcion</option>
                                                                                     <option value="1" value="1">Un Periodo</option>
                                                                                     <option value="2" value="2">Varios Periodos</option>
@@ -1021,6 +1028,18 @@
                 </div>
 
                 <script>
+
+
+function CambioPeriodo() {
+    var id= document.getElementById('ListarPeriodoEmpleado1').value;
+    if(id==2){
+        $('#idlistunico').show();
+    }else{
+        $('#idlistunico').hide();
+    }
+    
+}
+
                     $.post("index.php?page=Permisos", {
                         op: "ValidarUsuarioLogeado"
                     }, function(htmlexterno) {

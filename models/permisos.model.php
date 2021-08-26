@@ -164,29 +164,31 @@ function editarDias($periodo){
 function editarDiasvacaciones($nuevodia,$periodo){
     ConexionSQLRecursosHumanos();
    
-    $sql1=mssql_query("select iDisponibilidad from dbo.PR_Permisos WHERE  cPermisoId= '$periodo'");
+    $sql1=mssql_query("SELECT SUM(iDias) as dia FROM dbo.PR_PermisoH WHERE cPermisoId= '$periodo'");
     if($row=mssql_fetch_array($sql1)) {
-        $row['disponibilidad']= $row['iDisponibilidad'];
-    } if($nuevodia<$row['disponibilidad'] ) {
-        return 1;
-    }else {
-
+        $row['dia']=round($row['dia']);
+        if($nuevodia<= $row['dia']) {
+            return 1;
+        }else {
     
-   
-
-
-    $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
-
-    if($sql==true){
-        return 0;
-    }else{
-       return 1;
-    }
-    }
+        
+       
+    
+    
+        $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
+    
+        if($sql==true){
+            return 0;
+        }else{
+           return 1;
+        }
+        }
+    } 
 }
 
 function EditarPermiso($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin,$Motivo,$Observacion){
 $dias=ValidarDiasHabiles($nuevaFechaInicio,$nuevafechaFin);
+
 
      $sql=mssql_query("UPDATE RecursosHumanos.dbo.PR_PermisoH SET 
      fDesde='$nuevaFechaInicio', 
@@ -196,6 +198,8 @@ $dias=ValidarDiasHabiles($nuevaFechaInicio,$nuevafechaFin);
      cObservaciones='$Observacion' 
      
      WHERE cPermisoId='$Periodo' AND fDesde='$fechaInicio' and fHasta='$fechaFin' AND Estado=1");
+
+
      $recalculo=recalculo($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin);
      if($sql==true){
         $sql2=mssql_query("UPDATE RecursosHumanos.dbo.PR_Permisos SET iDisponibilidad='$recalculo' WHERE cPermisoId='$Periodo' AND Estado=1");

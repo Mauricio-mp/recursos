@@ -92,6 +92,7 @@ $cuenta["nombres"]=$_SESSION['logeo'];
    
       
 
+
       //Devolvemos el array pasado a JSON como objeto
       echo $datos;
       break;
