@@ -806,7 +806,7 @@
                                                                 <input type="text" name="diasvacaciones" id="diasvacaciones" > <br>
                                                                 
                                                                 <button type="button" onclick="guardarNuevosDias()" name="" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar Cambios</button> &nbsp;&nbsp;&nbsp;
-                                                                <button type="button" onclick="retocederDias()" class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
+                                                                <button type="button" onclick="retocederDias()"  class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
                                                                 
             
                                                             </form>
