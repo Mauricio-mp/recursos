@@ -803,7 +803,7 @@
                                                         <div class="DivDias" style="display: none;">
                                                             <form action="" >
                                                                 <label for="">Dias</label>
-                                                                <input type="text" name="diasvacaciones" id="diasvacaciones" > <br>
+                                                                <input type="text" name="diasvacaciones" id="diasvacaciones" > <br> </br>
                                                                 
                                                                 <button type="button" onclick="guardarNuevosDias()" name="" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;Guardar Cambios</button> &nbsp;&nbsp;&nbsp;
                                                                 <button type="button" onclick="retocederDias()"  class="btn btn-primary"><i class="fa fa-mail-reply"></i>&nbsp;</button>
