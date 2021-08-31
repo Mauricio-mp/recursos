@@ -2,6 +2,7 @@
     "telemetry.machineId": "88231b71b76e8913cb4b1a55b2e271a99ba0a48e59a1ebe1870072a413e89980",
     "openedPathsList": {
         "workspaces3": [
+            "file:///var/www/html/proyecto/recursos",
             "file:///var/www/html/recursos"
         ],
         "files2": []
@@ -49,7 +50,18 @@
                                     "id": "openRecentFolder",
                                     "uri": {
                                         "$mid": 1,
-                                        "fsPath": "/var/www/html/recursos",
+                                        "fsPath": "/var/www/html/proyecto/recursos",
+                                        "external": "file:///var/www/html/proyecto/recursos",
+                                        "path": "/var/www/html/proyecto/recursos",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "/var/www/html/proyecto/recursos"
+                                },
+                                {
+                                    "id": "openRecentFolder",
+                                    "uri": {
+                                        "$mid": 1,
                                         "external": "file:///var/www/html/recursos",
                                         "path": "/var/www/html/recursos",
                                         "scheme": "file"
@@ -384,7 +396,8 @@
                                 },
                                 {
                                     "id": "workbench.action.togglePanel",
-                                    "label": "Show &&Panel"
+                                    "label": "Show &&Panel",
+                                    "checked": true
                                 },
                                 {
                                     "id": "vscode.menubar.separator"
@@ -1403,5 +1416,5 @@
     },
     "theme": "vs-dark",
     "themeBackground": "#1e1e1e",
-    "pickerWorkingDir": "/var/www/html"
+    "pickerWorkingDir": "/var/www/html/proyecto"
 }

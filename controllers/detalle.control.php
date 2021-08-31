@@ -7,8 +7,8 @@
   require_once("libs/template_engine.php");
   require_once("models/vacaciones.model.php");
   function run(){
-session_start();
-ob_start();
+    session_start();
+    ob_start();
 
 
     $var=$_GET['cod'];

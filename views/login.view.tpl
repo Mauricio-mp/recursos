@@ -67,7 +67,9 @@
                       <div class="space-6"></div>
                       
                     <form method="post" action="index.php?page=login" id="form_login">
-                        <fieldset>
+                        
+                    <fieldset>
+                      
                           <label class="block clearfix">
                             <span class="block input-icon input-icon-right">
                               <input type="text" id="Codigo" name="Codigo"class="form-control" placeholder="Codigo de Empleado" ></input>

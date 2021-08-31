@@ -24,13 +24,15 @@ function Header()
 {
 
     // Logo
-    //$this->Image('../img/9.png',70,6,75);
+    $this->Image('../img/9.png',8,6,55);
+
+    
     // Arial bold 15
       $this->Ln(7);
      $this->SetFont('Arial','B',14);
-     $this->Cell(185,0,'MINISTERIO PUBICO',0,0,'C');
+     $this->Cell(185,0,'MINISTERIO PUBLICO',0,0,'C');
      $this->Ln(7);
-     $this->Cell(185,0,'Departamento de Personal',0,0,'C');
+     $this->Cell(185,0,'DEPARTAMENTO DE PERSONAL',0,0,'C');
      $this->Ln(7);
      $this->Cell(185,0,'HISTORIAL DE PERMISOS',0,0,'C');
     //$this->SetTextColor(194,8,8);
@@ -79,6 +81,8 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',13);
 $pdf->SetLeftMargin(18); #Establecemos los márgenes izquierda: 
 $pdf->SetRightMargin(18); #Establecemos los márgenes Derecha: 
+
+
 $pdf->AliasNbPages();
 
 
@@ -127,7 +131,7 @@ $pdf->Cell(15,6,$Identidad,0,1,"L");
 $pdf->Ln(10);
 $pdf->SetXY(18, 80);
 $pdf->SetFont('Arial','B',11);
-$pdf->Cell(15,6,"Permiso/Licencia",0,1,"L"); 
+$pdf->Cell(15,6,"Permiso/Licencias",0,1,"L"); 
 $pdf->SetXY(60, 80);
 $pdf->SetFont('Arial','B',11);
 $pdf->Cell(15,6,"Inicio",0,1,"L"); 
@@ -170,7 +174,16 @@ $pdf->Cell(143,-3,"",0,1,"C");
 $pdf->Cell(143,3,$data[$i]['cMotivo'],0,1,"R");
 
 $pdf->Cell(170,-3,"",0,1,"C");
-$pdf->Cell(170,3,$data[$i]['cPeriodo'],0,1,"R");
+
+if($data[$i]['cPeriodo']=='1111 - 1111'){
+  $pdf->Cell(182,3,"Periodo de Prueba ",0,1,"R"); 
+  
+}else{
+  $pdf->Cell(170,3,$data[$i]['cPeriodo'],0,1,"R");
+}
+
+
+
 
 
 
