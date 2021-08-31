@@ -1430,7 +1430,7 @@ function CambioPeriodo() {
                         $('.DivDias').hide();   
                         $('#tablaPeriodo').show();
                     }else{
-                        toastr.error(" su dias solo pueden ser mayor a los disponible ");
+                        toastr.error(response);
                     }
                     
 
@@ -1810,7 +1810,7 @@ function CambioPeriodo() {
                         var fecha_fin = $('#NuevaFecha2').val();
                         var Motivo = $('#nuevoMotivo').val();
                         var Observacion =$('#NuevaObservacion').val();
-
+                        
                         $.post("index.php?page=Permisos", {
                             op: "ModificarPermisos",
                             fechaInicio: fecha_inicio,
@@ -1850,7 +1850,7 @@ function CambioPeriodo() {
                             $('#cardModificarpermisos').hide();
 
                         } else {
-                            toastr.error("Error al guardar los cambios", "Oops");
+                            toastr.error(response, "Oops");
                         }
                     }
 
