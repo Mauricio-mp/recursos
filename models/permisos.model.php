@@ -296,21 +296,25 @@ function OPtenerCodigoEmpleado($identidad){
     return $row['cempno'];
 }
  function optenerEmpleado($opcion,$valor){
-    ConexionSQLRecursosHumanos();
+    ConexionSQLserverVAM();
     switch ($opcion) {
         case 'identidad':
             $valor=trim($valor);
-            $sql=mssql_query("SELECT * FROM GN_Persona WHERE cPersonaId ='$valor'");
+            $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+            FROM prempy a
+            INNER JOIN HRJobs b
+            ON a.cjobtitle = b.cJobTitlNO
+            INNER JOIN prdept c
+            ON c.cdeptno=a.cdeptno 
+            WHERE a.cfedid ='$valor'");
             while($ejecutar=mssql_fetch_array($sql)){
-                $ejecutar["cNombres"]=utf8_encode($ejecutar["cNombres"]);
-                $ejecutar["cApellidos"]=utf8_encode($ejecutar["cApellidos"]);
-                $identidad=$ejecutar["cPersonaId"];
+               $ejecutar["cNombres"]=utf8_encode($ejecutar["cfname"]);
+                $ejecutar["cApellidos"]=utf8_encode($ejecutar["clname"]);
+                $ejecutar["cPersonaId"]=$ejecutar['cfedid'];
+                $ejecutar["Cargo"]=utf8_encode($ejecutar['cDesc']);
+                $ejecutar["Departamento"]=utf8_encode($ejecutar['cdeptname']);
 
-                $sql2=mssql_query("SELECT cCargo,cDepartamento,cEstado FROM PR_Empleado WHERE cPersonaId IN(SELECT cPersonaId FROM GN_Persona WHERE cPersonaId='$identidad')");
-                if($fila=mssql_fetch_array($sql2)){
-                 $cargo=$fila["cCargo"];
-                 $Depto=$fila["cDepartamento"];
-                 $estado=$fila["cEstado"];
+                $estado=$ejecutar["cstatus"];
                 if($estado=='A'){
                     $estado="Activo";
                 }elseif ($estado=="I") {
@@ -318,144 +322,96 @@ function OPtenerCodigoEmpleado($identidad){
                 }elseif ($estado=="T") {
                     $estado="No labora";
                 }
-                 $ejecutar["estado"]=$estado;
 
-                } 
-
-                $sql3=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$cargo'");
-                    if($row=mssql_fetch_array($sql3)){
-                       $ejecutar["Cargo"]=utf8_encode($row['cDescripcion']);
-                      //  $arr[]=$row['cDescripcion'];
-                        
-                    }
-
-                    $sql4=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$Depto'");
-                    if($row1=mssql_fetch_array($sql4)){
-                        $ejecutar["Departamento"]=utf8_encode($row1['cDescripcion']);
-                        //$arr[]=$row1['cDescripcion'];
-                        
-                    }
-                    $ejecutar['Codigo']=OPtenerCodigoEmpleado($valor);
-                   
+                $ejecutar["estado"]=$estado;   
                 $arr[]=$ejecutar;
-
-        }
+            }
+            
+           
     break;
     case 'nombre':
-        $sql=mssql_query("SELECT * FROM GN_Persona WHERE cNombres like '%$valor%'");
-        while($ejecutar=mssql_fetch_array($sql)){
-            $ejecutar["cNombres"]=utf8_encode($ejecutar["cNombres"]);
-            $ejecutar["cApellidos"]=utf8_encode($ejecutar["cApellidos"]);
-            $identidad=$ejecutar["cPersonaId"];
-        
-            $sql2=mssql_query("SELECT cCargo,cDepartamento,cEstado FROM PR_Empleado WHERE cPersonaId IN(SELECT cPersonaId FROM GN_Persona WHERE cPersonaId='$identidad')");
-            if($fila=mssql_fetch_array($sql2)){
-             $cargo=$fila["cCargo"];
-             $Depto=$fila["cDepartamento"];
-
-             $estado=$fila["cEstado"];
-
-             
-
-            } 
-
-            $sql3=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$cargo'");
-                if($row=mssql_fetch_array($sql3)){
-                   $ejecutar["Cargo"]=$row['cDescripcion'];
-                  //  $arr[]=$row['cDescripcion'];
-                    
+        $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+            FROM prempy a
+            INNER JOIN HRJobs b
+            ON a.cjobtitle = b.cJobTitlNO
+            INNER JOIN prdept c
+            ON c.cdeptno=a.cdeptno 
+            WHERE a.cfname like '%$valor%'");
+            while($ejecutar=mssql_fetch_array($sql)){
+               $ejecutar["cNombres"]=utf8_encode($ejecutar["cfname"]);
+                $ejecutar["cApellidos"]=utf8_encode($ejecutar["clname"]);
+                $ejecutar["cPersonaId"]=$ejecutar['cfedid'];
+                $ejecutar["Cargo"]=utf8_encode($ejecutar['cDesc']);
+                $ejecutar["Departamento"]=utf8_encode($ejecutar['cdeptname']);
+                
+                $estado=$ejecutar["cstatus"];
+                if($estado=='A'){
+                    $estado="Activo";
+                }elseif ($estado=="I") {
+                    $estado="Inactivo";
+                }elseif ($estado=="T") {
+                    $estado="No labora";
                 }
 
-                $sql4=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$Depto'");
-                if($row1=mssql_fetch_array($sql4)){
-                    $ejecutar["Departamento"]=$row['cDescripcion'];
-                    //$arr[]=$row1['cDescripcion'];
-                    
-                }
-    
-            $arr[]=$ejecutar;
-
-    }
+                $ejecutar["estado"]=$estado;   
+                $arr[]=$ejecutar;
+            }
         break;
         case 'Apellido':
-            $sql=mssql_query("SELECT * FROM GN_Persona WHERE cApellidos like '%$valor%'");
+            $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+            FROM prempy a
+            INNER JOIN HRJobs b
+            ON a.cjobtitle = b.cJobTitlNO
+            INNER JOIN prdept c
+            ON c.cdeptno=a.cdeptno 
+            WHERE a.clname like '%$valor%'");
             while($ejecutar=mssql_fetch_array($sql)){
-                $ejecutar["cNombres"]=utf8_encode($ejecutar["cNombres"]);
-                $ejecutar["cApellidos"]=utf8_encode($ejecutar["cApellidos"]);
-                $identidad=$ejecutar["cPersonaId"];
-            
-                $sql2=mssql_query("SELECT cCargo,cDepartamento,cEstado FROM PR_Empleado WHERE cPersonaId IN(SELECT cPersonaId FROM GN_Persona WHERE cPersonaId='$identidad')");
-                if($fila=mssql_fetch_array($sql2)){
-                 $cargo=$fila["cCargo"];
-                 $Depto=$fila["cDepartamento"];
-    
-                 $estado=$fila["cEstado"];
-    
-                 
-    
-                } 
-    
-                $sql3=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$cargo'");
-                    if($row=mssql_fetch_array($sql3)){
-                       $ejecutar["Cargo"]=$row['cDescripcion'];
-                      //  $arr[]=$row['cDescripcion'];
-                        
-                    }
-    
-                    $sql4=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$Depto'");
-                    if($row1=mssql_fetch_array($sql4)){
-                        $ejecutar["Departamento"]=$row['cDescripcion'];
-                        //$arr[]=$row1['cDescripcion'];
-                        
-                    }
-        
+               $ejecutar["cNombres"]=utf8_encode($ejecutar["cfname"]);
+                $ejecutar["cApellidos"]=utf8_encode($ejecutar["clname"]);
+                $ejecutar["cPersonaId"]=$ejecutar['cfedid'];
+                $ejecutar["Cargo"]=utf8_encode($ejecutar['cDesc']);
+                $ejecutar["Departamento"]=utf8_encode($ejecutar['cdeptname']);
+                
+                $estado=$ejecutar["cstatus"];
+                if($estado=='A'){
+                    $estado="Activo";
+                }elseif ($estado=="I") {
+                    $estado="Inactivo";
+                }elseif ($estado=="T") {
+                    $estado="No labora";
+                }
+
+                $ejecutar["estado"]=$estado;   
                 $arr[]=$ejecutar;
-    
-        }
-            
+            }
         break;
         case 'Numero':
-            $consultarid=mssql_query("SELECT * FROM PR_Empleado WHERE cEmpleadoVAM ='$valor'");
-            $filas=mssql_fetch_array($consultarid);
-            if(mssql_num_rows($consultarid) > 0){
-              $IdEmpleado= $filas['cPersonaId'];
-
-            }
-
-            $sql=mssql_query("SELECT * FROM GN_Persona WHERE cPersonaId ='$IdEmpleado'");
+            $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+            FROM prempy a
+            INNER JOIN HRJobs b
+            ON a.cjobtitle = b.cJobTitlNO
+            INNER JOIN prdept c
+            ON c.cdeptno=a.cdeptno 
+            WHERE a.cempno ='$valor'");
             while($ejecutar=mssql_fetch_array($sql)){
-                $ejecutar["cNombres"]=utf8_encode($ejecutar["cNombres"]);
-                $ejecutar["cApellidos"]=utf8_encode($ejecutar["cApellidos"]);
-                $identidad=$ejecutar["cPersonaId"];
-            
-                $sql2=mssql_query("SELECT cCargo,cDepartamento,cEstado FROM PR_Empleado WHERE cPersonaId IN(SELECT cPersonaId FROM GN_Persona WHERE cPersonaId='$identidad')");
-                if($fila=mssql_fetch_array($sql2)){
-                 $cargo=$fila["cCargo"];
-                 $Depto=$fila["cDepartamento"];
-    
-                 $estado=$fila["cEstado"];
-    
-                 
-    
-                } 
-    
-                $sql3=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$cargo'");
-                    if($row=mssql_fetch_array($sql3)){
-                       $ejecutar["Cargo"]=$row['cDescripcion'];
-                      //  $arr[]=$row['cDescripcion'];
-                        
-                    }
-    
-                    $sql4=mssql_query("SELECT cDescripcion FROM GN_Varios WHERE cValor='$Depto'");
-                    if($row1=mssql_fetch_array($sql4)){
-                        $ejecutar["Departamento"]=$row['cDescripcion'];
-                        //$arr[]=$row1['cDescripcion'];
-                        
-                    }
-        
+               $ejecutar["cNombres"]=utf8_encode($ejecutar["cfname"]);
+                $ejecutar["cApellidos"]=utf8_encode($ejecutar["clname"]);
+                $ejecutar["cPersonaId"]=$ejecutar['cfedid'];
+                $ejecutar["Cargo"]=utf8_encode($ejecutar['cDesc']);
+                $ejecutar["Departamento"]=utf8_encode($ejecutar['cdeptname']);
+                
+                $estado=$ejecutar["cstatus"];
+                if($estado=='A'){
+                    $estado="Activo";
+                }elseif ($estado=="I") {
+                    $estado="Inactivo";
+                }elseif ($estado=="T") {
+                    $estado="No labora";
+                }
+
+                $ejecutar["estado"]=$estado;   
                 $arr[]=$ejecutar;
-    
-        }
+            }
         break;
     }
     return $arr;

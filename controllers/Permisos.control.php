@@ -55,7 +55,9 @@ if($DatoGet==2){
 
 $cuenta['ListarPeriodoEmpleado']=ListaPerriodos($_SESSION['expedicnte']);
 $cuenta['listarfriados']=Listarferiados('Feriados');
+//$cuenta['DatosEmpleado']=optenerEmpleado($opcion,$valor);
 $cuenta['DatosEmpleado']=optenerEmpleado($opcion,$valor);
+
 $Expediente=$_POST["vall"];
 
 $cuenta["datosPermiso"]=optenerDatosPermiso($_SESSION['expedicnte']);

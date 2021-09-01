@@ -244,7 +244,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Data Table</strong>
+                                <strong class="card-title">HISTORIAL DE EMPLEADO</strong>
                             </div>
 
 
@@ -252,36 +252,61 @@
 
 
                             <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <form id="form1" method="POST" action="index.php?page=Inicio">
+
+                            <h1 id="pppp"></h1>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="select" class=" form-control-label">Buscar Por:</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="txtopcion" id="txtopcion" class="form-control">
+                                  <option value="0" selected value="0" disabled="">Selecione su opcion</option>
+                                
+                                  <option value="identidad">Identidad</option>
+                                  <option value="nombre">Nombres</option>
+                                  <option value="Apellido">Apellido</option>
+                                  <option value="Numero">Número de Empleado</option>
+                                 
+                              </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Fecha Inicio</label></div>
+                                <div class="col-12 col-md-9"><input type="text" name="txtvalor" id="txtvalor" name="text-input" placeholder="Ingrese Valor" class="form-control"></div>
+                            </div>
+                            <center>
+                            <button type="submit" id="BtnBuscar" name="BtnBuscar" class="btn btn-primary">&nbsp;Buscar</button>
+                            </center>
+                            <div class="card-body" id="tablaEmpleado">
+                                <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>codigo</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Identidad</th>
-                                            <th>Empleado</th>
-                                            <th>accion</th>
+                                            <th scope="col">Expediente</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">Cargo</th>
+                                            <th scope="col">Departamento</th>
+                                            <th scope="col">Opción</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         {{foreach cursos}}
                                         <tr>
-
-                                            <td>{{cempno}}</td>
+                                            <th scope="row">{{cempno}}</th>
                                             <td>{{cfname}}</td>
                                             <td>{{clname}}</td>
                                             <td>{{cfedid}}</td>
                                             <td>{{cstatus}}</td>
+                                           
                                             <td><span class="ti-eye"></span><span class="icon-name"><a href="index.php?page=fechas&cod={{cempno}}"><i></i> Ver</a></span></td>
-
-
-
                                         </tr>
                                         {{endfor cursos}}
                                     </tbody>
                                 </table>
+                            </div>
+                        </form>
+
+                               
                             </div>
                         </div>
                     </div>
