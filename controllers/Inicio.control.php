@@ -6,11 +6,12 @@
  */
   require_once("libs/template_engine.php");
   require_once("models/users.model.php");
-
   
   function run(){
     session_start();
     ob_start();
+    $txtopcion=$_POST['txtopcion'];
+    $txtvalor=$_POST['txtvalor'];
    
     if($_SESSION['logeo']==''){
       header('location:index.php');
@@ -22,7 +23,7 @@
     ini_set ('memory_limit', '-1');
     $viewData = array();
     
-     $viewData["cursos"] = mostrarEmpleado();
+     $viewData["cursos"] = mostrarEmpleado($txtopcion,$txtvalor);
       //$viewData["secciones"] = obtenerSecciones();
       
 

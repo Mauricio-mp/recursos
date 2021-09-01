@@ -157,28 +157,134 @@ for ($i=0; $i <count($new) ; $i++) {
       
     }
 
-    function mostrarEmpleado(){
+    function mostrarEmpleado($txtopcion,$valor){
 
-      $vam= ConexionSQLserverVAM();
+      ConexionSQLserverVAM();
+
+      switch ($txtopcion) {
+        case 'identidad':
+          $valor=trim($valor);
+          $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+          FROM prempy a
+          INNER JOIN HRJobs b
+          ON a.cjobtitle = b.cJobTitlNO
+          INNER JOIN prdept c
+          ON c.cdeptno=a.cdeptno 
+          WHERE a.cfedid ='$valor'");
+          while($row=mssql_fetch_array($sql)){
+             $row["cfname"]=utf8_encode($row["cfname"]);
+              $row["clname"]=utf8_encode($row["clname"]);
+              $row["cfedid"]=$row['cfedid'];
+              $row["cDesc"]=utf8_encode($row['cDesc']);
+              $row["cdeptname"]=utf8_encode($row['cdeptname']);
+
+              $estado=$row["cstatus"];
+              if($estado=='A'){
+                  $estado="Activo";
+              }elseif ($estado=="I") {
+                  $estado="Inactivo";
+              }elseif ($estado=="T") {
+                  $estado="No labora";
+              }
+
+              $row["estado"]=$estado;   
+              $arr[]=$row;
+          }
+          break;
+        case 'nombre':
+          $valor=trim($valor);
+          $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+          FROM prempy a
+          INNER JOIN HRJobs b
+          ON a.cjobtitle = b.cJobTitlNO
+          INNER JOIN prdept c
+          ON c.cdeptno=a.cdeptno 
+          WHERE a.cfname like '%$valor%'");
+          while($row=mssql_fetch_array($sql)){
+             $row["cfname"]=utf8_encode($row["cfname"]);
+              $row["clname"]=utf8_encode($row["clname"]);
+              $row["cfedid"]=$row['cfedid'];
+              $row["cDesc"]=utf8_encode($row['cDesc']);
+              $row["cdeptname"]=utf8_encode($row['cdeptname']);
+
+              $estado=$row["cstatus"];
+              if($estado=='A'){
+                  $estado="Activo";
+              }elseif ($estado=="I") {
+                  $estado="Inactivo";
+              }elseif ($estado=="T") {
+                  $estado="No labora";
+              }
+
+              $row["estado"]=$estado;   
+              $arr[]=$row;
+          }
+          break;
+
+          case 'Apellido':
+            $valor=trim($valor);
+          $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+          FROM prempy a
+          INNER JOIN HRJobs b
+          ON a.cjobtitle = b.cJobTitlNO
+          INNER JOIN prdept c
+          ON c.cdeptno=a.cdeptno 
+          WHERE a.clname like '%$valor%'");
+          while($row=mssql_fetch_array($sql)){
+             $row["cfname"]=utf8_encode($row["cfname"]);
+              $row["clname"]=utf8_encode($row["clname"]);
+              $row["cfedid"]=$row['cfedid'];
+              $row["cDesc"]=utf8_encode($row['cDesc']);
+              $row["cdeptname"]=utf8_encode($row['cdeptname']);
+
+              $estado=$row["cstatus"];
+              if($estado=='A'){
+                  $estado="Activo";
+              }elseif ($estado=="I") {
+                  $estado="Inactivo";
+              }elseif ($estado=="T") {
+                  $estado="No labora";
+              }
+
+              $row["estado"]=$estado;   
+              $arr[]=$row;
+          }
+            break;
+            case 'Numero':
+              $valor=trim($valor);
+          $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+          FROM prempy a
+          INNER JOIN HRJobs b
+          ON a.cjobtitle = b.cJobTitlNO
+          INNER JOIN prdept c
+          ON c.cdeptno=a.cdeptno 
+          WHERE a.cempno ='$valor'");
+          while($row=mssql_fetch_array($sql)){
+             $row["cfname"]=utf8_encode($row["cfname"]);
+              $row["clname"]=utf8_encode($row["clname"]);
+              $row["cfedid"]=$row['cfedid'];
+              $row["cDesc"]=utf8_encode($row['cDesc']);
+              $row["cdeptname"]=utf8_encode($row['cdeptname']);
+
+              $estado=$row["cstatus"];
+              if($estado=='A'){
+                  $estado="Activo";
+              }elseif ($estado=="I") {
+                  $estado="Inactivo";
+              }elseif ($estado=="T") {
+                  $estado="No labora";
+              }
+
+              $row["estado"]=$estado;   
+              $arr[]=$row;
+          }
+              break;
+        default:
+          # code...
+          break;
+      }
       
 
-      $query= mssql_query("SELECT * FROM prempy");
-      while($row=mssql_fetch_array($query)){
-       // $nombre=$row['cempno'];
-     
-        //$nombre[]= $row['cempno'];
-
-       
-
-        $arr[] = $row;
-
-
-        
-
-
-
-
-      }
      
 return $arr;
 
