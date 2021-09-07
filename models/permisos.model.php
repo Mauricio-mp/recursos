@@ -172,21 +172,28 @@ function editarDiasvacaciones($nuevodia,$periodo){
 
     $sql1=mssql_query("SELECT SUM(iDias) as dia FROM dbo.PR_PermisoH WHERE cPermisoId= '$periodo'");
     if($row=mssql_fetch_array($sql1)) {
-        $row['dia']=round($row['dia']);
-        if($nuevodia< $row['dia']) {
-            return 1;
-        }else {
-            if($periodo=='1111 - 1111'){
-                $nuevodia= '-'.$nuevodia;
-                $sql=mssql_query("UPDATE PR_Permisos SET Catantidad_Fija='$nuevodia' where cPermisoId='$periodo' ");
-                
-            }else{
-                $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
-    
-            }
+        $row['dia']=$row['dia'];
+
+        if($row['dia']==0.00){
+            $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
+        }else{
+            if($nuevodia< $row['dia']) {
+                return "Los dias ingresados deben ser mayores a los dias gozados";
+            }else {
+                if($periodo=='1111 - 1111'){
+                    $nuevodia= '-'.$nuevodia;
+                    $sql=mssql_query("UPDATE PR_Permisos SET Catantidad_Fija='$nuevodia' where cPermisoId='$periodo' ");
+                    
+                }else{
+                    $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
         
-       
+                }
+            
+           
+            }
+
         }
+        
     } 
     
 
@@ -246,7 +253,6 @@ $diasAnteriores=ValidarDiasHabiles($fechaInicio,$fechaFin);
 
      }
 
-   
  return $msg;
 }
 function validarDiasAnteriores($fechaInicio,$fechaFin,$Periodo,$nuevaFechaInicio,$nuevafechaFin,$diasAnteriores){
@@ -292,7 +298,6 @@ function OPtenerCodigoEmpleado($identidad){
 
     $row=mssql_fetch_array($sql);
 
-
     return $row['cempno'];
 }
  function optenerEmpleado($opcion,$valor){
@@ -300,7 +305,7 @@ function OPtenerCodigoEmpleado($identidad){
     switch ($opcion) {
         case 'identidad':
             $valor=trim($valor);
-            $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO
@@ -330,7 +335,7 @@ function OPtenerCodigoEmpleado($identidad){
            
     break;
     case 'nombre':
-        $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+        $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc,c.cdeptname,a.cstatus 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO
@@ -358,7 +363,7 @@ function OPtenerCodigoEmpleado($identidad){
             }
         break;
         case 'Apellido':
-            $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO
@@ -386,7 +391,7 @@ function OPtenerCodigoEmpleado($identidad){
             }
         break;
         case 'Numero':
-            $sql=mssql_query("SELECT a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cfedid,a.cstatus 
+            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO
@@ -762,6 +767,7 @@ ConexionSQLserver();
      }
 
      function optenerDatosPermiso($Expediente){
+        ConexionSQLRecursosHumanos();
          $sql=mssql_query("SELECT  * FROM PR_Permisos WHERE cPersonaId='$Expediente' and Estado='1' ORDER BY cPeriodo DESC");
          while($ejecutar=mssql_fetch_array($sql)){
              $optenerTipo=$ejecutar["cTipo"];
@@ -852,7 +858,7 @@ ConexionSQLserver();
               return $output;
        }
 
-       function BorrarPeriodo($permisoId,$periodoId){
+       function BorrarPeriodo($permisoId,$periodoId,$cPermiso){
           
 
            $sql=mssql_query("SELECT x.* FROM RecursosHumanos.dbo.PR_PermisoH x
@@ -866,19 +872,29 @@ ConexionSQLserver();
         }
 
         $consultaPeriodo=mssql_query("SELECT x.* FROM RecursosHumanos.dbo.PR_Permisos x
-        WHERE cPermisoId='$periodoId'");
+        WHERE cPermisoId='$periodoId' and Estado=1");
         $fila=mssql_fetch_array($consultaPeriodo);
-
         $sumador=$dias+$fila['iDisponibilidad'];
-         $Sumardias=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$sumador' WHERE cPermisoId='$periodoId'");
+        $fija=$fila['Catantidad_Fija'];
+        $totalPruebas=$fija+$dias;
+        if($cPermiso=='1111 - 1111'){
+            $Sumardias=mssql_query("UPDATE PR_Permisos SET Catantidad_Fija='$totalPruebas' WHERE cPermisoId='$periodoId'");
+            $update=mssql_query("UPDATE PR_PermisoH SET Estado='0' WHERE Cod_Permisos='$permisoId' and cPermisoId='$periodoId'");
+
+        }else{
+            $Sumardias=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$sumador' WHERE cPermisoId='$periodoId'");
          $update=mssql_query("UPDATE PR_PermisoH SET Estado='0' WHERE Cod_Permisos='$permisoId' and cPermisoId='$periodoId'");
+        }
+        
+         
 
          if($Sumardias==true && $update==true){
              return 0;
          }else{
              return 1;
          }
-
+         
+       
                   
        }
 

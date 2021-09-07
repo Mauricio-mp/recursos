@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title></title>
     <link rel="stylesheet" href="public/css/estilo.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
@@ -682,8 +682,8 @@
         }
 
         function editarUser(user) {
-
-
+         
+           
             var NuevoCodigo = $('#NuevoCodigo').val();
             var NuevoNombre1 = $('#NuevoNombre1').val();
             var NuevoNombre2 = $('#NuevoNombre2').val();
@@ -702,8 +702,9 @@
                 codigo: user
             }, function(data) {
 
-
                 var json = JSON.parse(data);
+                console.log(data);
+
                 $('#iduser').text(json[0]['Id_Usuario']);
                 $('#NuevoCodigo').val(json[0]['CodEmpleado']);
                 $('#NuevoNombre1').val(json[0]['Nombre']);
@@ -714,6 +715,7 @@
                 $('#Contrasenia').val(json[0]['Contrasenia']);
                 $('.divtablaEditar').hide();
                 $('.MostrarEdicion').show();
+                
 
 
             });
