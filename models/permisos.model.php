@@ -163,22 +163,27 @@ function editarDias($periodo){
 
 function editarDiasvacaciones($nuevodia,$periodo){
     ConexionSQLRecursosHumanos();
-   $consulta=mssql_query("SELECT cPeriodo FROM PR_Permisos WHERE cPermisoId='$periodo' ");
+   $consulta=mssql_query("SELECT cPeriodo,iDisponibilidad FROM PR_Permisos WHERE cPermisoId='$periodo' ");
    $fila=mssql_fetch_array($consulta);
 
-   
-   
+   $sql1=mssql_query("SELECT SUM(iDias) as dia FROM dbo.PR_PermisoH WHERE cPermisoId= '$periodo' and Estado=1");
 
-
-    $sql1=mssql_query("SELECT SUM(iDias) as dia FROM dbo.PR_PermisoH WHERE cPermisoId= '$periodo'");
+   if($fila['iDisponibilidad']==0.00){
+        if($nuevodia<0){
+            return "el dia ingresado debe ser mayor a cero";
+        }else{
+            $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
+        }
+   }else{
     if($row=mssql_fetch_array($sql1)) {
         $row['dia']=$row['dia'];
 
         if($row['dia']==0.00){
-            $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo' ");
+            $sql=mssql_query("UPDATE PR_Permisos SET iDisponibilidad='$nuevodia' where cPermisoId='$periodo'  ");
         }else{
             if($nuevodia< $row['dia']) {
                 return "Los dias ingresados deben ser mayores a los dias gozados";
+                //return $row['dia'];
             }else {
                 if($periodo=='1111 - 1111'){
                     $nuevodia= '-'.$nuevodia;
@@ -195,13 +200,17 @@ function editarDiasvacaciones($nuevodia,$periodo){
         }
         
     } 
+   }
+
+
+   
     
 
     if($sql==true ){
         return 0;
     }else{
        return 1;
-    }
+    }  
 }
 
 function EditarPermiso($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin,$Motivo,$Observacion){
@@ -217,7 +226,7 @@ $diasAnteriores=ValidarDiasHabiles($fechaInicio,$fechaFin);
      
      WHERE cPermisoId='$Periodo' AND fDesde='$fechaInicio' and fHasta='$fechaFin' AND Estado=1");
 
-      $validarDiasAnteriores=validarDiasAnteriores($fechaInicio,$fechaFin,$Periodo,$nuevaFechaInicio,$nuevafechaFin,$diasAnteriores);
+      $validarDiasAnteriores=validarDiasAnteriores($fechaInicio,$fechaFin,$Periodo,$nuevaFechaInicio,$nuevafechaFin,$diasAnteriores,$dias);
      if($validarDiasAnteriores==true){
         $recalculo=recalculo($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin);
         $resultado=$recalculo['resultado'];
@@ -249,14 +258,14 @@ $diasAnteriores=ValidarDiasHabiles($fechaInicio,$fechaFin);
         }
         }  
      }else{
-         $msg="sobrepasa los dias disponibles";
+         $msg="Sobrepasa los dias disponibles";
 
      }
 
  return $msg;
 }
-function validarDiasAnteriores($fechaInicio,$fechaFin,$Periodo,$nuevaFechaInicio,$nuevafechaFin,$diasAnteriores){
-    $sql=mssql_query("SELECT SUM(iDias) as Dias FROM PR_PermisoH WHERE cPermisoId='$Periodo';");
+function validarDiasAnteriores($fechaInicio,$fechaFin,$Periodo,$nuevaFechaInicio,$nuevafechaFin,$diasAnteriores,$dias){
+    $sql=mssql_query("SELECT SUM(iDias) as Dias FROM PR_PermisoH WHERE cPermisoId='$Periodo' and Estado=1 ");
     $sql2=mssql_query("SELECT * from PR_Permisos WHERE cPermisoId ='$Periodo'");
     $fila=mssql_fetch_array($sql2);
     $row=mssql_fetch_array($sql);
@@ -508,7 +517,7 @@ $Descripcion=utf8_decode($Descripcion);
     $diAnterior=ValidarDiasHabiles($fechaInicio,$fechaFin);
     $resultado=0;
     
-    $consultarDias=mssql_query("SELECT SUM(iDias) as Dias FROM PR_PermisoH WHERE cPermisoId='$Periodo'");
+    $consultarDias=mssql_query("SELECT SUM(iDias) as Dias FROM PR_PermisoH WHERE cPermisoId='$Periodo' and Estado=1");
     if($row=mssql_fetch_array($consultarDias)){
         $dias=-$row['Dias'];
         

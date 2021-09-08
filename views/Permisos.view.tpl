@@ -924,7 +924,7 @@
                                                                             <div id="idlist">
                                                                                 <select id="ListarPeriodoEmpleado" class="form-control">
                                                                                                                     <option value="0" selected value="0" disabled="">Selecione Periodo</option>
-                                                                                                                   
+                                                                                                                    <option value="1111 - 1111">Periodo de Pruebas</option>
                                                                                                                     {{foreach ListarPeriodoEmpleado}}
                                                                                                                     <option value="{{cPermisoId}}">{{cPeriodo}}</option>
                                                                                                                    
