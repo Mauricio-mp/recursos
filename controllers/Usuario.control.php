@@ -1,4 +1,4 @@
-+<?php
+<?php
 /* Calendario Controller
  * Created By DMLL
  * elaborado 11/03/2020
@@ -13,7 +13,7 @@
 
   
   if($_SESSION['Codigo_Empleado']==''){
-    header('location:index.php');
+   header('location:index.php');
   }
  
 
@@ -33,7 +33,7 @@
 
         $mensaje=InsertRol($permisos,$nombre);
 
-        echo $mensaje;
+        echo json_encode($mensaje);
         break;
       case 'Editar':
         $idEmpleado=$_POST['codigo'];
@@ -41,7 +41,7 @@
         $datosempleado=getdatosempleado($idEmpleado);
 
         echo json_encode($datosempleado, JSON_FORCE_OBJECT);
-
+        
         break;
         case 'ModificarUser':
         

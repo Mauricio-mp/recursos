@@ -776,7 +776,6 @@
                                                                     <th scope="col">Disponible</th>
                                                                     <th scope="col">Opciones</th>
                                                                     
-
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -925,7 +924,7 @@
                                                                             <div id="idlist">
                                                                                 <select id="ListarPeriodoEmpleado" class="form-control">
                                                                                                                     <option value="0" selected value="0" disabled="">Selecione Periodo</option>
-                                                                                                                   
+                                                                                                                    <option value="1111 - 1111">Periodo de Pruebas</option>
                                                                                                                     {{foreach ListarPeriodoEmpleado}}
                                                                                                                     <option value="{{cPermisoId}}">{{cPeriodo}}</option>
                                                                                                                    
@@ -1416,7 +1415,7 @@ function CambioPeriodo() {
                 function guardarNuevosDias(periodo) {
                 var nuevodia =$('#diasvacaciones').val();
                 
-
+                   
               
                 $.post("index.php?page=Permisos", {
                 op: "Modificardias",
@@ -1471,13 +1470,14 @@ function CambioPeriodo() {
                         $("#tablaFeriados").load("index.php?page=Permisos #tablaFeriados");
                     }
 
-
                     $('#BtnGuardarAnularPermiso').click(function() {
 
                         document.getElementById("BtnGuardarAnularPermiso").disabled = true;
                         var permisoId = $('#chkPermisos').val();
                         var periodoId = $('#ListarPeriodoEmpleado').val();
-
+                        var cPermiso= $('#ListarPeriodoEmpleado option:selected').text();
+                       
+                         
                         if (periodoId == null || periodoId == null) {
                             toastr.error("No deje campos vacios", "Error");
                             document.getElementById("BtnGuardarAnularPermiso").disabled = false;
@@ -1485,7 +1485,8 @@ function CambioPeriodo() {
                             $.post("index.php?page=Permisos", {
                                 op: "BorrarPermisos",
                                 permisoId: permisoId,
-                                periodoId: periodoId
+                                periodoId: periodoId,
+                                cPermiso:cPermiso
                             }, function(respuesta) {
 
 
@@ -1496,7 +1497,7 @@ function CambioPeriodo() {
                                     $('#chkPermisos').val('');
                                     document.getElementById("BtnGuardarAnularPermiso").disabled = false;
                                 } else {
-                                    toastr.error("Porfavor Intente mas tarde", "Error");
+                                    toastr.error(respuesta);
                                     document.getElementById("BtnGuardarAnularPermiso").disabled = false;
 
                                 }
@@ -1854,6 +1855,7 @@ function CambioPeriodo() {
                     }
 
                     function myFunction(valor) {
+                        
                         $.post("index.php?page=Permisos", {
                                 vall: valor,
                                 op: "ver"

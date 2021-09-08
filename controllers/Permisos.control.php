@@ -62,6 +62,7 @@ $Expediente=$_POST["vall"];
 
 $cuenta["datosPermiso"]=optenerDatosPermiso($_SESSION['expedicnte']);
 
+
 if ($_SESSION['logeo']=='') {
  
 
@@ -111,19 +112,22 @@ case 'verDias':
     $periodo=$_SESSION['DiasPeriodo'];
 
 
-    echo editarDiasvacaciones($nuevodia,$periodo);
+  echo editarDiasvacaciones($nuevodia,$periodo);
+
+
   break;
   
       case 'BorrarPermisos':
         $permisoId=$_POST['permisoId'];
         $periodoId=$_POST['periodoId'];
-       $datos=BorrarPeriodo($permisoId,$periodoId);
+        $cPermiso=$_POST['cPermiso'];
+       $datos=BorrarPeriodo($permisoId,$periodoId,$cPermiso);
 
-       if($datos==0){
+     /*if($datos==0){
         $historial=InsertHistorialPermisos($_SESSION['expedicnte'], $_SESSION['Codigo_Empleado'],$permisoId,$periodoId);
-       }
+       } */
        
-          
+        
     
           //Devolvemos el array pasado a JSON como objeto
          echo $datos;
@@ -288,7 +292,7 @@ case 'verDias':
     $fechaFin=$_SESSION['fecha2_sesion'];
     $Observacion=$_POST['Observacion'];
     
-
+    
     echo EditarPermiso($nuevaFechaInicio,$Periodo,$nuevafechaFin,$fechaInicio,$fechaFin,$Motivo,$Observacion);
 
 

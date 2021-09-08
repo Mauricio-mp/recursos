@@ -14,7 +14,6 @@ function optenerRoles(){
     return $datos;
 }
 function getdatosempleado($idEmpleado){
-
     ConexionSQLserver();
     $cont=1;
     $sql=mssql_query("SELECT a.Id_Usuario, a.CodEmpleado, a.Nombre, a.Apellido, b.Descripcion,b.id_Rol,a.Contrasenia,a.Apellido2,a.Nombre2 FROM R_Usuarios a, cRoles b WHERE b.id_Rol = a.Id_Rol and a.Id_Usuario ='$idEmpleado'");
