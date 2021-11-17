@@ -27,6 +27,7 @@ $cuenta["Tipo"]=optenertipo();
   $cuenta["Motivo"]=optener_motivo();
 $cuenta["peiodo1"]=$tipoPermiso[0];
 $cuenta["periodo2"]=$tipoPermiso[1];
+$cuenta["Nombre_Firma"]=optener_jefes();
 if($DatoGet==1){
 
 
@@ -73,7 +74,10 @@ $cuenta["nombres"]=$_SESSION['logeo'];
 
    
    $op=$_POST["op"];
- 
+   $op2=$_GET['x'];
+   if($op==''){
+     $op=$op2;
+   }
    
  $cuenta["nombres"]=$_SESSION['logeo'];
 
@@ -297,12 +301,64 @@ case 'verDias':
 
 
   break;
-  
+  case 'PdfPermisos':
+    $permisosId=$_POST['idvariosperiodos'];
+    $ListarPeriodoEmpleado2=$_POST['ListarPeriodoEmpleado2'];
+    $idem=$_GET['idem'];
+    $ListarPeriodoEmpleado1=$_POST['ListarPeriodoEmpleado1'];
+    $jefes1=$_POST['jefes1'];
+
+ 
+
+    $_SESSION["ListarPeriodoEmpleado2"]=$ListarPeriodoEmpleado2;
+    $_SESSION["idem"]=$idem;
+    $_SESSION["jefes1"]=$jefes1;
+
+    
+    for ($i=0; $i <count($permisosId) ; $i++) {
+        
+      $cost .= '\''.$permisosId[$i].'\''. ',';
+      
+    }
+
+    $myString = substr($cost, 0, -1);
+
+    $_SESSION["myString"]=$myString;
+
+
+
+      if($ListarPeriodoEmpleado1 ==1){  
+        header('Location: Pdf/reportevacaciones.php');
+      }else{
+        header('Location: Pdf/reportesvariosvacaciones.php');
+      
+      }
+  break;
+
+  case 'Pdfsaldo':
+    $idem=$_GET['idem'];
+    $periodoseleccionar=$_POST['periodoseleccionar'];
+    $jefes=$_POST['jefes'];
+    $observacionsaldo=$_POST['CAI'];
+
+   
+
+    
+    $_SESSION["idem"]=$idem;
+    $_SESSION["periodoseleccionar"]=$periodoseleccionar;
+    $_SESSION["jefes"]=$jefes;
+    $_SESSION["observacionsaldo"]=$observacionsaldo;
+    
+    
+
+    header('Location: Pdf/reporteSaldoVacaciones.php');
+
+  break;
   
 
   
   case 'VerificarPsw':
-    $optenerpasw=$_POST[''];
+    
   break;
   
   default:

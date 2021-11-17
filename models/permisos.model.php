@@ -36,6 +36,20 @@ for ($i=$fecha1; $i >1993 ; $i--) {
 return $arr;
 
 }
+function optener_jefes(){
+    ConexionSQLserver();
+    $sql=mssql_query("select * from JefeSeccionTramites where estado=1");
+    while($ejecutar=mssql_fetch_array($sql)){
+        $ejecutar['Nombre_Firma']=utf8_encode( $ejecutar['Nombre_Firma']);
+        $ejecutar['Apellido_Firma']=utf8_encode( $ejecutar['Apellido_Firma']);
+        $ejecutar['nombrecompleto']=$ejecutar['Nombre_Firma'].' '.$ejecutar['Apellido_Firma'];
+
+       
+        $arr[]=$ejecutar;
+    
+    }
+        return $arr;
+     }
 function Restriccion($codigoEmpleado){
     ConexionSQLserver();
 

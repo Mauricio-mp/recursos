@@ -35,6 +35,7 @@
             $_SESSION["ReporteGeneral"]=false;
             $_SESSION["ReporteImpuestos"]=false;
             $_SESSION["ReporteBancos"]=false;
+            $_SESSION["Jefes"]=false;
             
 
             
@@ -62,6 +63,7 @@
             $_SESSION["ReporteImpuestos"]=false;
             $_SESSION["ReporteGeneral"]=false;
             $_SESSION["ReporteBancos"]=false;
+            $_SESSION["Jefes"]=false;
         }
     }
     function mw_redirectToLogin($to){

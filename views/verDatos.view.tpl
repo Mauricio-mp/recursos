@@ -180,7 +180,13 @@
 
 
 
+                           {{if Crearusuario}}
                             <li><i style="color:black" class="fa fa-list"></i><a style=" color: black; font-weight: bold;font-size:13px; " href="index.php?page=Usuario">&nbsp; Nevo usuario</a></li>
+                            {{endif Crearusuario}}
+
+                            {{if Jefes}}
+                            <li><i style="color:black" class="fa fa-list"></i><a style=" color: black; font-weight: bold;font-size:13px; " href="index.php?page=nuevoJefe">&nbsp; Nuevo Jefe</a></li>
+                            {{endif Jefes}}
 
 
                         </ul>
@@ -225,8 +231,8 @@
                         <div class="user-menu dropdown-menu">
 
 
-                            <a class="nav-link" href="index.php?page=logout"><i class="fa fa-power -off"></i>Cerrar Sesión</a>
-                            <a data-toggle="modal" data-target="#CambiarPsw" class="nav-link"><i class="fa fa-power -off"></i>Cambiar Contraseña</a>
+                            <a class="nav-link" href="index.php?page=logout"><i class="fa fa-power -off"></i>Cerrar Sesiï¿½n</a>
+                            <a data-toggle="modal" data-target="#CambiarPsw" class="nav-link"><i class="fa fa-power -off"></i>Cambiar Contraseï¿½a</a>
                         </div>
                     </div>
 

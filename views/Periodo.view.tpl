@@ -199,8 +199,13 @@
 
 
 
+                           {{if Crearusuario}}
                             <li><i style="color:black" class="fa fa-list"></i><a style=" color: black; font-weight: bold;font-size:13px; " href="index.php?page=Usuario">&nbsp; Nevo usuario</a></li>
+                            {{endif Crearusuario}}
 
+                            {{if Jefes}}
+                            <li><i style="color:black" class="fa fa-list"></i><a style=" color: black; font-weight: bold;font-size:13px; " href="index.php?page=nuevoJefe">&nbsp; Nuevo Jefe</a></li>
+                            {{endif Jefes}}
 
                         </ul>
                     </li>

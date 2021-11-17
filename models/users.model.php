@@ -134,6 +134,10 @@ for ($i=0; $i <count($new) ; $i++) {
           $_SESSION["Reportes"]=true;
           $_SESSION["ReporteBancos"]=true;
         }
+        if($row['Id_Permiso']==23){
+          $_SESSION["Usuario"]=true;
+          $_SESSION["Jefes"]=true;
+        }
         
       }
 

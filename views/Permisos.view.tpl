@@ -78,8 +78,18 @@
     <script src="./js/timepicki.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <link rel="stylesheet" href="assets/css/lib/chosen/chosen.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 
-
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".standardSelect").chosen({
+                disable_search_threshold: 10,
+                no_results_text: "Oops, nothing found!",
+                width: "100%"
+            });
+        });
+    </script>
 </head>
 
 <body class="fondo">
@@ -201,7 +211,13 @@
 
 
 
+                           {{if Crearusuario}}
                             <li><i style="color:black" class="fa fa-list"></i><a style=" color: black; font-weight: bold;font-size:13px; " href="index.php?page=Usuario">&nbsp; Nevo usuario</a></li>
+                            {{endif Crearusuario}}
+
+                            {{if Jefes}}
+                            <li><i style="color:black" class="fa fa-list"></i><a style=" color: black; font-weight: bold;font-size:13px; " href="index.php?page=nuevoJefe">&nbsp; Nuevo Jefe</a></li>
+                            {{endif Jefes}}
 
 
                         </ul>
@@ -402,6 +418,7 @@
                                                 <a class="nav-item nav-link" id="nav-BorarPermiso-tab" data-toggle="tab" href="#nav-BorarPermiso" role="tab" aria-controls="nav-BorarPermiso" aria-selected="false">Eliminar Permiso</a>
                                                 <a class="nav-item nav-link" id="nav-feriados-tab" data-toggle="tab" href="#nav-feriados" role="tab" aria-controls="nav-feriados" aria-selected="false">Dias feriados</a>
                                                 <a class="nav-item nav-link" id="nav-vacaciones-tab" data-toggle="tab" href="#nav-vacaciones" role="tab" aria-controls="nav-vacaciones" aria-selected="false">Informe de Vacaciones</a>
+                                                <a class="nav-item nav-link" id="nav-saldovacaciones-tab" data-toggle="tab" href="#nav-saldovacaciones" role="tab" aria-controls="nav-saldovacaciones" aria-selected="false">Informe Saldo de Vacaciones</a>
                                                 
 
                                             </div>
@@ -444,7 +461,63 @@
 
                                                 <div id="arrorvalidacion"></div>
                                             </div>
+                                            <!-- PRUEBA-->
+                                            <div class="tab-pane fade" id="nav-saldovacaciones" role="tabpanel" aria-labelledby="nav-saldovacaciones-tab">
+                                                <div class="row form-group">
+                                                    <div class="card-body card-block">
+                                                        <form action="index.php?page=Permisos&x=Pdfsaldo&idem={{expedicnte}}" method="post" enctype="multipart/form-data" class="form-horizontal" id="pdform1">
+                                                            <div class="row form-group">
+                                                               <div class="card-body card-block">
+                                                                   <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label></div>
+                                                                       <select name="periodoseleccionar" id="periodoseleccionar" class="form-control">
+                                                                           <option value="0"  >Selecione Periodo</option>
+                                                                           <option value="1111 - 1111">Periodo de Pruebas</option>
+                                                                           {{foreach Periodo}}
+                                                                           
+                                                                           <option>{{periodo}}</option>
+                                                                           {{endfor Periodo}}  
+                                                                       </select>
+
+                                                                       <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Jefes</label></div>
+                                                                        <select name="jefes" id="jefes" class="form-control">
+                                                                            <option value="0"  >Selecione un jefe</option>
+                                                                            {{foreach Nombre_Firma}}
+                                                                            <option>{{nombrecompleto}}</option>
+                                                                            {{endfor Nombre_Firma}}  
+                                                                        </select> <br>
+
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-bordered" id="dynamic_field">
+                                                                               <tr>
+                                                                                <td>OBSERVACIONES</td>
+                                                                                <td class="col-md-1" >ACCIONES</td C>
+                                                                              <tr>
+                                                  
+                                                                               
+                                                                            </td>
+                                                                        
+                                                                                
+                                                                              </tr>
+                                                                            </table>
+                                                                             <div>
+                                                                                <button type="button" class="btn btn-primary mr-2" onclick="agregarFila()">AGREGAR OBSERVACIÓN </button>
+                                                                                
+                                                                                 </div>
+                                                                            <br>
+                                                                        
+                                                                            
+                                                                            <button type="button" onclick="validarsaldo()" class="btn btn-outline-primary btn-lg btn-block"  >Imprimir PDf</button>
+                                                                          </div>
+                                                               </div>
+                                                           </div>
+                                                       </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- FIN PRUEBA-->
                                             <!-- FERIADOS-->
+                                            
                                             <div class="tab-pane fade" id="nav-feriados" role="tabpanel" aria-labelledby="nav-feriados-tab">
                                                 <div class="row form-group">
                                                     <div class="card-body card-block">
@@ -957,47 +1030,82 @@
                                             <!-- FIN BORAR PERMISO-->
 
 
-                                            <!-- INICIO DE REPORTE DE VACACIONES-->
-                                            <div class="tab-pane fade" id="nav-vacaciones" role="tabpanel" aria-labelledby="nav-vacaciones-tab">
-                                                <div class="row form-group">
-                                                    <div class="card-body card-block">
-                                                        <form action="index.php?page=Periodo" method="post" enctype="multipart/form-data" class="form-horizontal" id="">
-                                                            <div class="row form-group">
-                                                                <div class="card-body card-block">
-                                                                    <form action="#" method="post" class="form-inline" id="idlist">
-                                                                        <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label>
-                                                                            <div id="idlist">
-                                                                                <select id="ListarPeriodoEmpleado1" onchange="CambioPeriodo()" class="form-control">
-                                                                                    <option value="0" selected value="0" disabled="">Selecione una opcion</option>
-                                                                                    <option value="1" value="1">Un Periodo</option>
-                                                                                    <option value="2" value="2">Varios Periodos</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div id="idlistunico" style="display: none;">
-                                                                                <select class="form-control">
-                                                                                    <option value="0" selected value="0" disabled="">Selecione una opcion</option>
-                                                                                    <option value="1" value="1">Un Periodo</option>
-                                                                                    <option value="2" value="2">Varios Periodos</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>   
-                                                                        <center>
-                                                                            <button type="button" id="BtnGuardarAnularPermiso" class="btn btn-primary btn-lg btn-block">Aceptar</button>
-                                                                        </center>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                          <!-- INICIO DE REPORTE DE VACACIONES-->
+                                          <div class="tab-pane fade" id="nav-vacaciones" role="tabpanel" aria-labelledby="nav-vacaciones-tab">
+                                            <div class="row form-group">
+                                                <div class="card-body card-block">
+                                                    <form action="index.php?page=Permisos&x=PdfPermisos&idem={{expedicnte}}" method="post" enctype="multipart/form-data" class="form-horizontal" id="pdform">
+                                                        <div class="row form-group">
+                                                            <div class="card-body card-block">
+                                                                
+                                                                    <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Opciones</label>
+                                                                        <div id="idlist">
+                                                                            
+                                                                            
+                                                                            
+                                                                            <select name="ListarPeriodoEmpleado1"  id="ListarPeriodoEmpleado1" onchange="CambioPeriodo()"  class="form-control">
+                                                                                
+                                                                                <option value="0" selected >Selecione Periodo</option>
+                                                                                <option value="1" value="1">Un Periodo</option>
+                                                                                <option value="2" value="2">Varios Periodos</option>
+                                                                            </select>
+                                                                        </div> <br>
 
+                                                                      
+
+                                                                        <div id="idlistunico" style="display: none;">
+                                                                            <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label>
+                                                                                <select name="ListarPeriodoEmpleado2" id="ListarPeriodoEmpleado2"  class="form-control">
+                                                                                    
+                                                                                   
+                                                                                    {{foreach Periodo}}
+                                                                                    <option>{{periodo}}</option>
+                                                                                   
+                                                                                    {{endfor Periodo}}   
+                                                                            </select>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Seleccione Jefes</label>
+                                                                    <select name="jefes1" id="jefes1" class="form-control">
+                                                                        <option value="0"  >Selecione un jefe</option>
+                                                                        {{foreach Nombre_Firma}}
+                                                                        <option>{{nombrecompleto}}</option>
+                                                                        {{endfor Nombre_Firma}}  
+                                                                    </select> <br>
+                                                                    <div id="variosperiodos" style="display: none;">
+                                                                        <div required class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label>
+                                                                             <select   id="idvariosperiodos" name="idvariosperiodos[]" data-placeholder="Seleccione los periodos" multiple class="standardSelect">
+                                                                                {{foreach Periodo}}
+                                                                                <option value="{{periodo}}">{{periodo}}</option>
+                                                                                {{endfor Periodo}}   
+                                                                            </select>
+                                                                                
+                                                                    </div>
+                                                                </div> 
+
+                                                                    
+                                                                   
+                                                                    <center>
+                                                                        
+                                                                        <button type="button"  id="habilitar1" class="btn btn-outline-primary btn-lg btn-block"  disabled >Imprimir PDf</button>
+                                                                    </center>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
+
                                             </div>
-                                            <!-- FIN DE REPORTE DE VACACIONES-->
+                                        </div>
+                                        <!-- FIN DE REPORTE DE VACACIONES-->
+
 
                                         </div>
 
                                     </div>
+                                     
                                 </div>
+                                
                             </div>
                         </div>
 
@@ -1027,13 +1135,42 @@
 
                 <script>
 
+function agregarFila(){
+document.getElementById("dynamic_field").insertRow(-1).innerHTML = '<td><textarea id="CAI[]" name="CAI[]" placeholder="AGREGAR OBSERVACIÓN "  class="form-control"></textarea> </td> <td><input style=" text-aling:center" type="button" class="borrar btn btn-danger btn_remove" value="Eliminar" </td>        ';
+}
+$(document).on('click', '.borrar', function (event) {
+    event.preventDefault();
+    $(this).closest('tr').remove();
+});
 
+
+function validarsaldo() {
+    let periodo= document.getElementById('periodoseleccionar').value;
+    let jefes= document.getElementById('jefes').value;
+   if( periodo==0 || jefes==0 ){
+    toastr.error("Campos vacios");
+   }else{
+    $('#pdform1').submit();
+   }
+}
 function CambioPeriodo() {
     var id= document.getElementById('ListarPeriodoEmpleado1').value;
-    if(id==2){
-        $('#idlistunico').show();
-    }else{
+   
+    if(id==0){
         $('#idlistunico').hide();
+        $('#variosperiodos').hide();
+        document.getElementById("habilitar1").disabled=true;
+       
+    }
+    if(id==1){
+        $('#idlistunico').show();
+        $('#variosperiodos').hide();
+        document.getElementById("habilitar1").disabled=false;
+        
+    }if(id==2){
+        $('#variosperiodos').show();
+        $('#idlistunico').hide();
+        document.getElementById("habilitar1").disabled=false;
     }
     
 }
@@ -1083,7 +1220,34 @@ function CambioPeriodo() {
 
 
                     });
+                    $(document).ready(function() {
+            $('#habilitar1').click(function() {
+                var item = [];
+                var opcion = $('#ListarPeriodoEmpleado1').val();
+                var opcion2 = $('#ListarPeriodoEmpleado2').val();
+                var opcion3 = $('#jefes1').val();
+  
+                
+                $('#idvariosperiodos').each(function() {
+                    item.push($(this).val());
+                });
 
+                if(item=='' &&  opcion2 !='' && opcion==2 ){
+                toastr.error("Campo varios periodos vacio");
+
+             }else if(opcion3==0){
+                toastr.error("Campo Jefe Vacio");
+             }
+
+            
+               else{
+                  $('#pdform').submit();
+               }
+            });
+
+         
+
+        });   
                     $("#pswConfirmar").keyup(function() {
                         var optenernueva = $('#pswNueva').val();
                         var confirmar = $('#pswConfirmar').val();

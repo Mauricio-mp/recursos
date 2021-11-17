@@ -20,6 +20,9 @@
     
     //Este switch se encarga de todo el enrutamiento
     switch($pageRequest){
+        case 'nuevoJefe':
+            require_once("controllers/nuevoJefe.control.php");
+            break;
         case 'bancos':
             require_once("controllers/bancos.control.php");
            die();
@@ -110,6 +113,7 @@
     }
 
       switch($pageRequest){
+        
         case "Periodo":
             if(mw_estaLogueado()) {
                 require_once("controllers/Periodo.control.php");
@@ -198,6 +202,6 @@
           }
 
     //Si no muere antes no hay recurso
-    require_once("controllers/error.control.php");
+    //require_once("controllers/error.control.php");
     die();
 ?>
