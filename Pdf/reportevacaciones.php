@@ -8,7 +8,7 @@ include('Funciones.php');
  $periodoempleado=$_SESSION["ListarPeriodoEmpleado2"];
 $identidad=$_SESSION["idem"];
 $jefes1=$_SESSION["jefes1"];
-
+$nombre= $_SESSION['logeo'];
 
 
 //$datos=mostrardatosTrab($mes);
@@ -85,7 +85,7 @@ $pdf->SetFont('Arial','B',10);
 
 
     ConexionSQLRecursosHumanos();
-    $sql=mssql_query("select h.fDesde,h.fHasta,h.iDias,h.iHorasDiarias,s.cPeriodo, h.cObservaciones from PR_Permisos s inner join PR_PermisoH h on s.cPermisoId = h.cPermisoId where s.cPeriodo='$periodoempleado' and s.cPersonaId='$identidad'");
+    $sql=mssql_query("select h.cAutorizador,h.fDesde,h.fHasta,h.iDias,h.iHorasDiarias,s.cPeriodo, h.cObservaciones from PR_Permisos s inner join PR_PermisoH h on s.cPermisoId = h.cPermisoId where s.cPeriodo='$periodoempleado' and s.cPersonaId='$identidad'");
     while($row=mssql_fetch_array($sql)) {
       $pdf->Cell(45, 10, 'Fecha Inicio (Inclusive) ', 0, 0, 'C', false); 
       $pdf->Cell(45, 10, 'Fecha fin (Inclusive)', 0, 0, 'C', false);
@@ -98,7 +98,7 @@ $pdf->SetFont('Arial','B',10);
       $pdf->Cell(35, 5, $row['iDias']= round($row['iDias']), 0, 0, 'C', false);
       $pdf->Cell(10,5, $row['iHorasDiarias']= round($row['iHorasDiarias']), 0, 0, 'C', false);
       $pdf->Cell(65,5, $row['cPeriodo'], 0, 1, 'C', false);
-      $pdf->Cell(0,5, 'Autorizado Por:Denis', 0, 1, 'L', false);
+      $pdf->Cell(0,5, "Autorizado Por:\t".utf8_decode($row['cAutorizador']), 0, 1, 'L', false);
       $pdf->Cell(0,5,'Observacion: ' .$row['cObservaciones'], 0, 1, 'L', false);
       $pdf->Cell(0,5,'----------------------------------------------------------------------------------------------------------------------------------------------', 0, 1, 'L', false);
       
@@ -113,12 +113,17 @@ while($row=mssql_fetch_array($sql1)){
   $pdf->Cell(0,5,$row['cPeriodo'].':'.' '. $row['iDisponibilidad'].' '.'dias habiles', 0, 1, 'L', false);
 }
 $pdf->Cell(0,10,'Tegucigalpa M.D.C'.' '.date('d').' '.'dias del mes de'.' '.GetMes(date('m')).' '.'del'.' '.date('Y'),0,1,'L');
-$pdf->Ln(25);
 
-$pdf->Cell(0, 10, '_____________________________'.'                                                '.'_____________________________', 0, 1, 'L', false);
-$pdf->Cell(0, 10, '             '.'Elaborado por'.'                                                                          '.utf8_decode($jefes1), 0, 1, 'L', false);
-
-
+$pdf->Ln(15);
+      $pdf->Cell(85,10,"_______________________________________",0,0,'C',0);
+      $pdf->Cell(85,10,"______________________________________ ",0,0,'C',0);
+      
+      $pdf->Ln();
+      $pdf->Cell(85,5,"ELABORADO POR",0,0,'C',0);
+      $pdf->Cell(85,5,utf8_decode($jefes1),0,0,'C',0);
+      $pdf->Ln();  
+      $pdf->Cell(85,5,utf8_decode($nombre),0,0,'C',0);
+      $pdf->Cell(85,5,"JEFE DE SECCION DE TRAMITE",0,0,'C',0);
 
 
 

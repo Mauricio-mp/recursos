@@ -328,7 +328,7 @@ function OPtenerCodigoEmpleado($identidad){
     switch ($opcion) {
         case 'identidad':
             $valor=trim($valor);
-            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus 
+            $sql=mssql_query("SELECT  a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus,a.dhire,dcntrct 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO
@@ -358,7 +358,7 @@ function OPtenerCodigoEmpleado($identidad){
            
     break;
     case 'nombre':
-        $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc,c.cdeptname,a.cstatus 
+        $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc,c.cdeptname,a.cstatus,a.dhire,dcntrct 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO
@@ -386,7 +386,7 @@ function OPtenerCodigoEmpleado($identidad){
             }
         break;
         case 'Apellido':
-            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus 
+            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus,a.dhire,dcntrct 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO
@@ -414,7 +414,7 @@ function OPtenerCodigoEmpleado($identidad){
             }
         break;
         case 'Numero':
-            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus 
+            $sql=mssql_query("SELECT a.cfedid, a.cempno , a.cfname ,a.clname, b.cDesc ,c.cdeptname,a.cstatus,a.dhire,dcntrct 
             FROM prempy a
             INNER JOIN HRJobs b
             ON a.cjobtitle = b.cJobTitlNO

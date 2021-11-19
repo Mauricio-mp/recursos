@@ -139,6 +139,7 @@ case 'verDias':
   case 'ver':
     $pp =optenerEmpleado('identidad',$Expediente);
     $_SESSION['expedicnte']=$pp[0][0];
+    $_SESSION['codidoEmpleado']=$pp;
     $datos = array(
       'Estado' => 'ok',
       'Expediente' => $pp[0][0],
@@ -348,7 +349,7 @@ case 'verDias':
     $_SESSION["periodoseleccionar"]=$periodoseleccionar;
     $_SESSION["jefes"]=$jefes;
     $_SESSION["observacionsaldo"]=$observacionsaldo;
-    
+  
     
 
     header('Location: Pdf/reporteSaldoVacaciones.php');
