@@ -6,7 +6,6 @@ require('fpdf/WriteTag.php');
 require('ConversionLetras.php');
 include('Funciones.php');
 
-
 $mes=$_SESSION['mes'];
 $Ingresos=$_SESSION['CbxIngresos'];
 for ($i=0; $i <count($Ingresos) ; $i++) {
