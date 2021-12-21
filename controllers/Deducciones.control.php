@@ -39,13 +39,13 @@ switch ($opcion) {
       $nomina=$_POST['mes'];
       $opcion=$_POST['opcionBusqueda'];
       $TipoMes=$_POST['TipoMes'];
-
+      $IngresoPlanilla=$_POST['IngresoPlanilla'];
      
       $_SESSION['CbxDeduccion']=$nombre;
       $_SESSION['nomina']=$_POST['mes'];
       $_SESSION['opcionBusqueda']=$opcion;
       $_SESSION['TipoMes']=$_POST['TipoMes'];
-      
+      $_SESSION['IngresoPlanilla']=$IngresoPlanilla;
       for ($i=0; $i <count($nombre) ; $i++) {
         
         $cost .= '\''.$nombre[$i].'\''. ',';
@@ -55,7 +55,7 @@ switch ($opcion) {
       $myString = substr($cost, 0, -1);
     
         
-      $cuenta['Dat']=GetDatos($myString,$nomina,$opcion,$TipoMes);
+      $cuenta['Dat']=GetDatos($myString,$nomina,$opcion,$TipoMes,$IngresoPlanilla);
 
       $cuenta['Total']= $cuenta['Dat']['Total'];
 
@@ -82,10 +82,10 @@ switch ($opcion) {
           $deducciones=$_SESSION['CbxDeduccion'];
           $opcion=$_SESSION['opcionBusqueda'];
           $opcionMes=$_SESSION['TipoMes'];
-
+          $IngresoPlanilla=$_SESSION['IngresoPlanilla'];
 
      
-      exportProductDatabase($mes,$deducciones,$opcion,$opcionMes);
+      exportProductDatabase($mes,$deducciones,$opcion,$opcionMes,$IngresoPlanilla);
        renderizar("Deducciones",$cuenta);
           break;
    

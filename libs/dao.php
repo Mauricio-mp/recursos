@@ -29,7 +29,7 @@ if (!$connect || !mssql_select_db('recursos', $connect)) {
    
    }
     function ConexionSQLserverVAM(){
-    $server = '172.17.0.170:1433';
+    $server = '172.17.0.152:1433';
     $username='sa';
     $password ='';
     $conexion= mssql_connect ($server,$username,$password);

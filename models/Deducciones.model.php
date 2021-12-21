@@ -82,7 +82,7 @@ return $row;
  function imprimpir($myString,$nomina){
   return 0;
  }
- function mostrardatos($mes,$nomina,$opcion,$opcionMes){
+ function mostrardatos($mes,$nomina,$opcion,$opcionMes,$IngresoPlanilla){
   for ($i=0; $i <count($nomina) ; $i++) {
         
     $cost .= '\''.$nomina[$i].'\''. ',';
@@ -93,14 +93,29 @@ return $row;
   ConexionSQLserverVAM();
   $anio=date('Y',strtotime($opcionMes));
   $meses=date('m',strtotime($opcionMes));
-  if($opcion==0){
+
+  if($IngresoPlanilla==''){
+    if($opcion==0){
     
-    $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-    from prmisd a, prempy b where a.cempno=b.cempno  and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$meses'  and a.cdedcode IN($myString) order by a.tmodrec");
-    }else{
       $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-    from prmisd a, prempy b where a.cempno=b.cempno and cpayno='$mes' and a.cdedcode IN($myString) order by a.tmodrec");
-    }
+      from prmisd a, prempy b where a.cempno=b.cempno  and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$meses'  and a.cdedcode IN($myString) order by a.tmodrec");
+      }else{
+        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and cpayno='$mes' and a.cdedcode IN($myString) order by a.tmodrec");
+      }
+  }else{
+    
+
+    if($opcion==0){
+    
+      $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno  and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$meses' and cplnid='$IngresoPlanilla' and a.cdedcode IN($myString) order by a.tmodrec");
+      }else{
+        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and cpayno='$mes' and cplnid='$IngresoPlanilla' and a.cdedcode IN($myString) order by a.tmodrec");
+      }
+  }
+ 
   
     while($var=mssql_fetch_array($sql)){
       $var['mes']=$mes;
@@ -113,7 +128,7 @@ return $row;
   return $datos;
 
  }
- function exportProductDatabase($mes,$nomina,$opcion,$opcionMes) {
+ function exportProductDatabase($mes,$nomina,$opcion,$opcionMes,$IngresoPlanilla,$Tipoplanilla) {
   ConexionSQLserverVAM();
   $timestamp = time();
   $filename = 'Export_' . $timestamp . '.xls';
@@ -122,7 +137,7 @@ return $row;
   header("Content-Disposition: attachment; filename=\"$filename\"");
   
   $isPrintHeader = false;
-  $cont=mostrardatos($mes,$nomina,$opcion,$opcionMes);
+  $cont=mostrardatos($mes,$nomina,$opcion,$opcionMes,$IngresoPlanilla);
 
 for($i=0;$i<count($cont);$i++){
   $suma=$cont[$i]['ndedamt']+$suma;
@@ -153,19 +168,32 @@ function Getdeducciones(){
   } 
   return $datos;
 }
-function GetDatos($myString,$nomina,$opcion,$TipoMes){
+function GetDatos($myString,$nomina,$opcion,$TipoMes,$IngresoPlanilla){
   ConexionSQLserverVAM();
   $cont=1;
   $sum=0;
   $anio=date('Y',strtotime($TipoMes));
   $mes=date('m',strtotime($TipoMes));
-  if($opcion==0){
+
+  if($IngresoPlanilla==''){
+    if($opcion==0){
     
-  $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-  from prmisd a, prempy b where a.cempno=b.cempno and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$mes'  and a.cdedcode IN($myString) order by a.tmodrec");
+      $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$mes'  and a.cdedcode IN($myString) order by a.tmodrec");
+      }else{
+        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno  and cpayno='$nomina' and a.cdedcode IN($myString) order by a.tmodrec");
+      }
+    
   }else{
-    $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-  from prmisd a, prempy b where a.cempno=b.cempno  and cpayno='$nomina' and a.cdedcode IN($myString) order by a.tmodrec");
+    if($opcion==0){
+    
+      $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$mes'  and a.cdedcode IN($myString) and cplnid='$IngresoPlanilla' order by a.tmodrec");
+      }else{
+        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno  and cpayno='$nomina' and a.cdedcode IN($myString) and cplnid='$IngresoPlanilla' order by a.tmodrec");
+      }
   }
 
  

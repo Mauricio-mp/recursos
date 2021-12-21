@@ -19,13 +19,14 @@ switch ($opcion) {
       $nomina=$_POST['mes'];
       $opcionBusqueda=$_POST['opcionBusqueda'];
       $TipoMes=$_POST['TipoMes'];
+      $Tipoplanilla=$_POST['Tipoplanilla'];
 
       $_SESSION['CbxIngresos']=$nombre;
       $_SESSION['mes']=$_POST['mes'];
 
       $_SESSION['OpcionMes']=$_POST['TipoMes'];
       $_SESSION['OpcionBusqueda']=$_POST['opcionBusqueda'];
-      
+      $_SESSION['Tipoplanilla']=$Tipoplanilla;
       for ($i=0; $i <count($nombre) ; $i++) {
         
         $cost .= '\''.$nombre[$i].'\''. ',';
@@ -35,10 +36,10 @@ switch ($opcion) {
       $myString = substr($cost, 0, -1);
     
 
-      $cuenta['Dat']=GetDatos($nombre,$nomina,$opcionBusqueda,$TipoMes);
+      $cuenta['Dat']=GetDatos($nombre,$nomina,$opcionBusqueda,$TipoMes,$Tipoplanilla);
       $cuenta['Total']= $cuenta['Dat']['Total'];
       
-
+      //print_r($cuenta);
    
       renderizar("Ingresos",$cuenta);
     
@@ -50,6 +51,7 @@ switch ($opcion) {
       $Ingresos=$_SESSION['CbxIngresos'];
       $opcionBusuqeda=$_SESSION['OpcionBusqueda'];
       $opcionMes= $_SESSION['OpcionMes'];
+      $Tipoplanilla=$_SESSION['Tipoplanilla'];
       for ($i=0; $i <count($Ingresos) ; $i++) {
         
         $cost .= '\''.$Ingresos[$i].'\''. ',';
@@ -61,7 +63,7 @@ switch ($opcion) {
 
 
  
-  exportProductDatabase($mes,$myString,$opcionBusuqeda,$opcionMes);
+  exportProductDatabase($mes,$myString,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
    renderizar("Ingresos",$cuenta);
       break;
 
@@ -70,10 +72,11 @@ switch ($opcion) {
         $Ingresos=$_SESSION['CbxIngresos'];
         $opcionBusuqeda=$_SESSION['OpcionBusqueda'];
       $opcionMes= $_SESSION['OpcionMes'];
+      $Tipoplanilla=$_SESSION['Tipoplanilla'];
           if($Ingresos==100){
-            exportarExcel($mes,$Ingresos,$opcionBusuqeda,$opcionMes);
+            exportarExcel($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
           }else{
-           exportarExcel1($mes,$Ingresos,$opcionBusuqeda,$opcionMes);
+           exportarExcel1($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
           }
 
       

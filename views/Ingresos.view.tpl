@@ -288,6 +288,10 @@
                                             {{endfor seleccion}}
                                         </select></div>
                                     </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Planilla</label></div>
+                                        <div class="col-12 col-md-9"> <input type="text"  name="Tipoplanilla"  class="form-control" placeholder="Ingrese Tipo de planilla"></div>
+                                    </div>
                                     <div id="mostrarmes" style="display: block;">
                                         <div class="row form-group"  >
                                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Seleciones Mes</label></div>

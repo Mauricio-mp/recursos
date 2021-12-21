@@ -86,19 +86,33 @@ return $row;
 
  }
 
- function GetDatos($myString,$nomina,$opcionBusqueda,$TipoMes){
+ function GetDatos($myString,$nomina,$opcionBusqueda,$TipoMes,$Tipoplanilla){
     ConexionSQLserverVAM();
+    $sum=0;
     $cont=1;
     $dia=date("Y",strtotime($TipoMes));
     $mes=date("m",strtotime($TipoMes));
 
-if($opcionBusqueda=='0'){
-  $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
-  from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$mes'  and a.cpaycode IN('$myString') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
-}else{
-  $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
-  from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and  a.cpayno='$nomina' and a.cpaycode IN('$myString') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
-}
+    if($Tipoplanilla==''){
+      if($opcionBusqueda=='0'){
+        $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+        from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$mes'  and a.cpaycode IN('$myString') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
+      }else{
+        $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+        from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and  a.cpayno='$nomina' and a.cpaycode IN('$myString') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
+      }
+    }else{
+      
+      if($opcionBusqueda=='0'){
+        $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+        from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$mes'  and a.cpaycode IN('$myString') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
+      }else{
+        $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+        from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and  a.cpayno='$nomina' and a.cpaycode IN('$myString') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
+      }
+    }
+
+
     
       while($var=mssql_fetch_array($sql)){
         $var['num']=$cont++;
@@ -108,38 +122,41 @@ if($opcionBusqueda=='0'){
         if($var['nothtax']==0 || $var['nothtax']==0.00){
           $var['nothtax']=$var['nothntax'];
         }
-        $var['nothtax']=number_format($var['nothtax'],2);
+        $var['nothtax']=abs($var['nothtax']);
+       // $var['nothtax']=number_format($var['nothtax'],2);
         $var['dhire']=date('d/m/Y',strtotime($var['dhire']));
         $var['dcntrct']=date('d/m/Y',strtotime($var['dcntrct']));
         //$var['ndedamt']=number_format($var['ndedamt'],2);
+        $sum=$sum+$var['nothtax'];
+$datos['Total']=number_format($sum,2);
         $datos[]=$var;
     } 
     return $datos;
    
  }
- function mostrardatos1($mes,$Ingresos,$opcionBusqueda,$TipoMes){
+ function mostrardatos1($mes,$Ingresos,$opcionBusqueda,$TipoMes,$Tipoplanilla){
   
   ConexionSQLserverVAM();
   $dia=date("Y",strtotime($TipoMes));
   $meses=date("m",strtotime($TipoMes));
-  if($opcionBusqueda=='0'){
-    
-      $sql=mssql_query("SELECT  a.dtrs, c.cJobTitlNO,c.cDesc,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck,e.cglacct
-      from prmisc a, prempy b,hrjobs c,prdept d,prempp e where a.cempno=b.cempno and e.cempno=b.cempno and e.cpaycode IN('$Ingresos')  and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
-    
-  //  $sql=mssql_query("SELECT  a.dtrs, c.cJobTitlNO,c.cDesc,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck,e.cglacct
-   //   from prmisc a, prempy b,hrjobs c,prdept d,prempp e where a.cempno=b.cempno and e.cempno=b.cempno and e.cpaycode IN('112')  and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
-
+ 
+  if($Tipoplanilla==''){
+    if($opcionBusqueda=='0'){
+      $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses'  and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
+    }else{
+      $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and  a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
+    }
   }else{
-   
-     $sql=mssql_query("SELECT  a.dtrs, c.cJobTitlNO,c.cDesc,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck,e.cglacct
-      from prmisc a, prempy b,hrjobs c,prdept d,prempp e where a.cempno=b.cempno and e.cempno=b.cempno and e.cpaycode IN('$Ingresos')  and a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
-
-
-   // $sql=mssql_query("SELECT  a.dtrs, c.cJobTitlNO,c.cDesc,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck,e.cglacct
-    //  from prmisc a, prempy b,hrjobs c,prdept d,prempp e where a.cempno=b.cempno and e.cempno=b.cempno and e.cpaycode IN('112')  and a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
-
-     
+    
+    if($opcionBusqueda=='0'){
+      $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses'  and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
+    }else{
+      $sql=mssql_query("SELECT d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck
+      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and  a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
+    }
   }
     while($var=mssql_fetch_array($sql)){
       $var['mes']=$mes;
@@ -156,7 +173,7 @@ if($opcionBusqueda=='0'){
   return $datos;
 
  }
- function mostrardatos($mes,$Ingresos,$opcionBusqueda,$TipoMes){
+ function mostrardatos($mes,$Ingresos,$opcionBusqueda,$TipoMes,$Tipoplanilla){
   
   ConexionSQLserverVAM();
   $dia=date("Y",strtotime($TipoMes));
@@ -250,7 +267,7 @@ echo "suma:".number_format($suma,2);
   exit();
 }
 
-function exportarExcel1($mes,$codigos,$opcionBusqueda,$TipoMes){
+function exportarExcel1($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla){
   ConexionSQLserverVAM();
   $timestamp = time();
   $filename = 'Export_' . $timestamp . '.xls';
@@ -258,7 +275,7 @@ function exportarExcel1($mes,$codigos,$opcionBusqueda,$TipoMes){
   header("Content-Disposition: attachment; filename=\"$filename\"");
   
   $isPrintHeader = false;
-  $cont=mostrardatos1($mes,$codigos,$opcionBusqueda,$TipoMes);
+  $cont=mostrardatos1($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla);
   $suma=0;
 for($i=0;$i<count($cont);$i++){
   $monto=number_format($cont[$i]['nothtax'],2);
