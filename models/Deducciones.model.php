@@ -97,22 +97,22 @@ return $row;
   if($IngresoPlanilla==''){
     if($opcion==0){
     
-      $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno  and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$meses'  and a.cdedcode IN($myString) order by a.tmodrec");
+      $sql=mssql_query("SELECT b.cstatus, a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno  and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$meses'  and a.cdedcode IN($myString) and b.cstatus IN('A') order by a.tmodrec");
       }else{
-        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno and cpayno='$mes' and a.cdedcode IN($myString) order by a.tmodrec");
+        $sql=mssql_query("SELECT  b.cstatus,a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and cpayno='$mes' and a.cdedcode IN($myString) and b.cstatus IN('A') order by a.tmodrec");
       }
   }else{
     
 
     if($opcion==0){
     
-      $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno  and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$meses' and cplnid='$IngresoPlanilla' and a.cdedcode IN($myString) order by a.tmodrec");
+      $sql=mssql_query("SELECT b.cstatus, a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno  and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$meses' and cplnid='$IngresoPlanilla' and a.cdedcode IN($myString) and b.cstatus IN('A') order by a.tmodrec");
       }else{
-        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno and cpayno='$mes' and cplnid='$IngresoPlanilla' and a.cdedcode IN($myString) order by a.tmodrec");
+        $sql=mssql_query("SELECT  b.cstatus,a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and cpayno='$mes' and cplnid='$IngresoPlanilla' and a.cdedcode IN($myString) and b.cstatus IN('A') order by a.tmodrec");
       }
   }
  
@@ -178,21 +178,21 @@ function GetDatos($myString,$nomina,$opcion,$TipoMes,$IngresoPlanilla){
   if($IngresoPlanilla==''){
     if($opcion==0){
     
-      $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$mes'  and a.cdedcode IN($myString) order by a.tmodrec");
+      $sql=mssql_query("SELECT  b.cstatus,a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$mes'  and a.cdedcode IN($myString) and b.cstatus IN('A') order by a.tmodrec");
       }else{
-        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno  and cpayno='$nomina' and a.cdedcode IN($myString) order by a.tmodrec");
+        $sql=mssql_query("SELECT  b.cstatus,a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno  and cpayno='$nomina' and a.cdedcode IN($myString) and b.cstatus IN('A') order by a.tmodrec");
       }
     
   }else{
     if($opcion==0){
     
-      $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$mes'  and a.cdedcode IN($myString) and cplnid='$IngresoPlanilla' order by a.tmodrec");
+      $sql=mssql_query("SELECT  b.cstatus,a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno and YEAR(tmodrec)='$anio' and MONTH(tmodrec)='$mes'  and a.cdedcode IN($myString) and cplnid='$IngresoPlanilla' and b.cstatus IN('A') order by a.tmodrec");
       }else{
-        $sql=mssql_query("SELECT  a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
-      from prmisd a, prempy b where a.cempno=b.cempno  and cpayno='$nomina' and a.cdedcode IN($myString) and cplnid='$IngresoPlanilla' order by a.tmodrec");
+        $sql=mssql_query("SELECT  b.cstatus,a.cempno,b.clname, b.cfname,b.ctaxstate, cdeptno,a.cpayno,cfedid, a.cdedcode, a.cdesc, a.ndedamt,cplnid, a.tmodrec
+      from prmisd a, prempy b where a.cempno=b.cempno  and cpayno='$nomina' and a.cdedcode IN($myString) and cplnid='$IngresoPlanilla' and b.cstatus IN('A') order by a.tmodrec");
       }
   }
 
