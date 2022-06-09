@@ -69,22 +69,40 @@ switch ($opcion) {
 
       case '3':
         $mes=$_SESSION['mes'];
-        $Ingresos=$_SESSION['CbxIngresos'];
+        $Ingresos= trim($_SESSION['CbxIngresos']);
+       
         $opcionBusuqeda=$_SESSION['OpcionBusqueda'];
       $opcionMes= $_SESSION['OpcionMes'];
       $Tipoplanilla=$_SESSION['Tipoplanilla'];
-          if($Ingresos==100){
-            exportarExcel($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
-          }else{
-           exportarExcel1($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
-          }
+
+      switch ($Ingresos) {
+        case 100:
+ 
+          exportarExcel($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
+          break;
+        case 'INJUPEMP':
+
+         
+          exportarExcel2($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
+          break;
+          case 'IHSS':
+          exportarExcel2($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
+          break;
+        
+        default:
+         exportarExcel1($mes,$Ingresos,$opcionBusuqeda,$opcionMes,$Tipoplanilla);
+          break;
+      }
+          
+           
+          
 
       
 
 
    
    // exportarExcel($mes,$myString,$opcionBusuqeda,$opcionMes);
-   renderizar("Ingresos",$cuenta);
+   //renderizar("Ingresos",$cuenta);
         break;
    
   

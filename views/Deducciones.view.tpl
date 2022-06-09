@@ -338,7 +338,6 @@
                                         <h1>L.{{Total}}</h1>
                                     </div>
                                     {{endif Dat}}
-
                                     <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>

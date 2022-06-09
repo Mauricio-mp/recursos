@@ -276,7 +276,7 @@
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Fecha Inicio</label></div>
+                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Descripci&oacute;n</label></div>
                                 <div class="col-12 col-md-9"><input type="text" name="txtvalor" id="txtvalor" name="text-input" placeholder="Ingrese Valor" class="form-control"></div>
                             </div>
                             <center>
