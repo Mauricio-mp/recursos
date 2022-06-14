@@ -4,6 +4,11 @@
  * Created By OJBA
  * Last Modification 2018-03-05 IngresoPeriodoNuevo
  */
+/*
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL); 
+*/
   require_once("libs/template_engine.php");
   require_once("models/permisos.model.php");
 
@@ -338,10 +343,12 @@ case 'verDias':
 
   case 'Pdfsaldo':
     $idem=$_GET['idem'];
-    $periodoseleccionar=$_POST['periodoseleccionar'];
-    $jefes=$_POST['jefes'];
-    $observacionsaldo=$_POST['CAI'];
-
+    $periodoseleccionar=$_GET['periodos'];
+    $jefes=$_GET['jefes'];
+    $observacionsaldo=$_GET['descripcion'];
+    $json=json_decode($observacionsaldo,true);
+    $arrayPeridos=array_map("MostrarPeriodo",$json);
+    $arrayObservaciones=array_map("Mostrarobservaciones",$json);
    
 
     
@@ -350,9 +357,14 @@ case 'verDias':
     $_SESSION["jefes"]=$jefes;
     $_SESSION["observacionsaldo"]=$observacionsaldo;
   
-    
-
-    header('Location: Pdf/reporteSaldoVacaciones.php');
+    Imprimir($idem,array_filter($arrayPeridos),array_filter($arrayObservaciones),$json,$jefes,$periodoseleccionar);
+  
+   // $observacionsaldo=  str_replace("][",",",$observacionsaldo);
+   
+    //$array=json_decode($json);
+   
+//print_r(array_filter($arrayObservaciones));
+    //header('Location: Pdf/reporteSaldoVacaciones.php');
 
   break;
   

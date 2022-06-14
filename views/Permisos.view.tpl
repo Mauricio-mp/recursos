@@ -467,37 +467,47 @@
                                                     <div class="card-body card-block">
                                                         <form action="index.php?page=Permisos&x=Pdfsaldo&idem={{expedicnte}}" method="post" enctype="multipart/form-data" class="form-horizontal" id="pdform1">
                                                             <div class="row form-group">
+                                                               
                                                                <div class="card-body card-block">
-                                                                   <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Periodo</label></div>
-                                                                       <select name="periodoseleccionar" id="periodoseleccionar" class="form-control">
-                                                                           <option value="0"  >Selecione Periodo</option>
-                                                                           <option value="1111 - 1111">Periodo de Pruebas</option>
-                                                                           {{foreach Periodo}}
-                                                                           
-                                                                           <option>{{periodo}}</option>
-                                                                           {{endfor Periodo}}  
-                                                                       </select>
+                                                                <div class="row form-group">
+                                                                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Periodo</label></div>
+                                                                    <div class="col-12 col-md-9"> <select id="CbxPeridodo" name="CbxPeridodo" data-placeholder="Seleccione Periodo" multiple class="standardSelect">
+                                                                        {{foreach Periodo}}
+                                                                        <option value="{{periodo}}">{{periodo}}</option>
+                                                                        {{endfor Periodo}}
+                                                                    </select></div>
+                                                                </div>
 
-                                                                       <div class="form-group"><label for="exampleInputName2" class="pr-1  form-control-label">Jefes</label></div>
-                                                                        <select name="jefes" id="jefes" class="form-control">
-                                                                            <option value="0"  >Selecione un jefe</option>
-                                                                            {{foreach Nombre_Firma}}
-                                                                            <option>{{nombrecompleto}}</option>
-                                                                            {{endfor Nombre_Firma}}  
-                                                                        </select> <br>
+                                                            
+                                                             
+
+                                                                <div class="row form-group">
+                                                                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Jefes</label></div>
+                                                                    <div class="col-12 col-md-9"><select name="jefes" id="jefes" class="form-control">
+                                                                        <option value="0"  >Selecione un jefe</option>
+                                                                        {{foreach Nombre_Firma}}
+                                                                        <option>{{nombrecompleto}}</option>
+                                                                        {{endfor Nombre_Firma}}  
+                                                                    </select></div>
+                                                                </div>
+
+                                                               
+
+                                                                  
+
+                                                                      
 
                                                                         <div class="table-responsive">
                                                                             <table class="table table-bordered" id="dynamic_field">
                                                                                <tr>
                                                                                 <td>OBSERVACIONES</td>
-                                                                                <td class="col-md-1" >ACCIONES</td C>
-                                                                              <tr>
-                                                  
-                                                                               
-                                                                            </td>
-                                                                        
-                                                                                
-                                                                              </tr>
+                                                                                <td class="col-md-1" >ACCIONES</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><textarea type="text"  id="CAI" name="CAI" placeholder="AGREGAR OBSERVACIÓN "  class="form-control"></textarea> </td>
+                                                                                     <td><input style="text-align:center;" type="button" class="borrar btn btn-danger btn_remove" value="Eliminar" ></td>
+                                                                                    </tr>    
+                                                                             
                                                                             </table>
                                                                              <div>
                                                                                 <button type="button" class="btn btn-primary mr-2" onclick="agregarFila()">AGREGAR OBSERVACIÓN </button>
@@ -506,14 +516,19 @@
                                                                             <br>
                                                                         
                                                                             
-                                                                            <button type="button" onclick="validarsaldo()" class="btn btn-outline-primary btn-lg btn-block"  >Imprimir PDf</button>
+                                                                            <button type="button" onclick="validarsaldo('{{expedicnte}}')" class="btn btn-outline-primary btn-lg btn-block"  >Imprimir PDf</button>
                                                                           </div>
                                                                </div>
                                                            </div>
+                                                          
+                                         
                                                        </form>
+                                                      
                                                     </div>
 
                                                 </div>
+                                                <div id="gif" style="text-align: center;"></div>
+                                                <div id="ad54"></div>
                                             </div>
                                             <!-- FIN PRUEBA-->
                                             <!-- FERIADOS-->
@@ -1134,9 +1149,27 @@
                 </div>
 
                 <script>
+(function ($) {
+    $.fn.serializeFormJSON = function () {
+
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+})(jQuery);
 
 function agregarFila(){
-document.getElementById("dynamic_field").insertRow(-1).innerHTML = '<td><textarea id="CAI[]" name="CAI[]" placeholder="AGREGAR OBSERVACIÓN "  class="form-control"></textarea> </td> <td><input style=" text-aling:center" type="button" class="borrar btn btn-danger btn_remove" value="Eliminar" </td>        ';
+document.getElementById("dynamic_field").insertRow(-1).innerHTML = '<tr><td><textarea type="text"  id="CAI" name="CAI" placeholder="AGREGAR OBSERVACIÓN "  class="form-control"></textarea> </td> <td><input style=" text-aling:center" type="button" class="borrar btn btn-danger btn_remove" value="Eliminar" ></td></tr>       ';
 }
 $(document).on('click', '.borrar', function (event) {
     event.preventDefault();
@@ -1144,13 +1177,35 @@ $(document).on('click', '.borrar', function (event) {
 });
 
 
-function validarsaldo() {
-    let periodo= document.getElementById('periodoseleccionar').value;
+function validarsaldo(expediente) {
+    $('#gif').empty();
+    $('#ad54').empty();
+    var items = [];
+   var cai=[];
+
+$('#CbxPeridodo option:selected').each(function(){ items.push($(this).val()); });
+var result = items.join('\',\'');
+var text='\''+result+'\'';
+
+
+var Formata = $("#pdform1").serializeArray();
+var formData=JSON.stringify(Formata);
+console.log(formData);
     let jefes= document.getElementById('jefes').value;
    if( periodo==0 || jefes==0 ){
     toastr.error("Campos vacios");
    }else{
-    $('#pdform1').submit();
+    /*$('#pdform1').submit();*/
+
+    var link = 'index.php?page=Permisos&x=Pdfsaldo&idem='+expediente+'&periodos='+text+'&descripcion='+formData+'&jefes='+jefes;
+                    var iframe = document.createElement('iframe');
+                    iframe.frameBorder = 0;
+                    iframe.width = "1200px";
+                    iframe.height = "1000px";
+                    iframe.id = "randomid";
+                    iframe.setAttribute("src", link);
+                    document.getElementById("ad54").appendChild(iframe);
+                     $('#gif').delay(25000).fadeOut("slow");
    }
 }
 function CambioPeriodo() {
