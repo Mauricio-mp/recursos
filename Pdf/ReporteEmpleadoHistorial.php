@@ -6,7 +6,6 @@ $fmax=$_GET['fmax'];
 include('../libs/dao.php');
 
 
-
 require('fpdf/WriteTag.php');
 require('ConversionLetras.php');
 

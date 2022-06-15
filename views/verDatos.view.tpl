@@ -412,6 +412,16 @@
                $.post("index.php?page=verDatos ", {op:"InsertRegistro",codigo:codigo,fechaInicio:fechaInicio,FechaFin:FechaFin,usuarioLogueado:usuarioLogueado}, function(response){
          if(response==1){
            
+            var link = './Pdf/ReporteEmpleadoHistorial.php?x='+codigo+'&fmin='+fechaInicio+'&fmax='+FechaFin+'';
+                    var iframe = document.createElement('iframe');
+                    iframe.frameBorder = 0;
+                    iframe.width = "1500px";
+                    iframe.height = "1000px";
+                    iframe.id = "randomid";
+                    iframe.setAttribute("src", link);
+                    document.getElementById("ad54").appendChild(iframe);
+                     $('#gif').delay(2500).fadeOut("slow");
+
          }else{
           
           console.log(response);
