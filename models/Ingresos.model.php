@@ -143,19 +143,19 @@ $datos['Total']=number_format($sum,2);
   if($Tipoplanilla==''){
     if($opcionBusqueda=='0'){
       $sql=mssql_query("SELECT a.dtrs,c.cDesc,c.cJobTitlNO,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck, abs(nrate) CuotaPersonal,abs(nothertax)cuotaPatronal, nbasegrtax base_deduccion
-      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses'  and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
+      from prmisc a, prempy b,hrjobs c,prdept d,prempg e  where a.cempno=b.cempno and e.cempno=b.cempno  and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses'  and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
     }else{
       $sql=mssql_query("SELECT a.dtrs,c.cDesc,c.cJobTitlNO,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck, abs(nrate) CuotaPersonal,abs(nothertax)cuotaPatronal, nbasegrtax base_deduccion
-      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and  a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
+      from prmisc a, prempy b,hrjobs c,prdept d,prempg e  where a.cempno=b.cempno and e.cempno=b.cempno  and  a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno and b.cjobtitle=c.cJobTitlNO");
     }
   }else{
     
     if($opcionBusqueda=='0'){
       $sql=mssql_query("SELECT a.dtrs,c.cDesc,c.cJobTitlNO,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck, abs(nrate) CuotaPersonal,abs(nothertax)cuotaPatronal, nbasegrtax base_deduccion
-      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses'  and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
+      from prmisc a, prempy b,hrjobs c,prdept d,prempg e  where a.cempno=b.cempno and e.cempno=b.cempno  and YEAR(a.dtrs)='$dia' and MONTH(a.dtrs)='$meses'  and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
     }else{
       $sql=mssql_query("SELECT a.dtrs,c.cDesc,c.cJobTitlNO,d.cdeptname,d.cdeptno,b.dhire,b.dcntrct,b.cempno,b.clname,b.cstatus, b.cfname,b.ctaxstate,a.cdeptno,a.cpayno,cfedid, a.cpaycode, a.cref,cplnid,a.nothntax,a.nothtax,a.dcheck, abs(nrate) CuotaPersonal,abs(nothertax)cuotaPatronal, nbasegrtax base_deduccion
-      from prmisc a, prempy b,hrjobs c,prdept d where a.cempno=b.cempno and  a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
+      from prmisc a, prempy b,hrjobs c,prdept d,prempg e  where a.cempno=b.cempno and e.cempno=b.cempno  and  a.cpayno='$mes' and a.cpaycode IN('$Ingresos') and b.cdeptno=d.cdeptno AND cplnid='$Tipoplanilla' and b.cjobtitle=c.cJobTitlNO");
     }
   }
 
@@ -275,7 +275,7 @@ function exportarExcel1($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla){
   header("Content-Disposition: attachment; filename=\"$filename\"");
   
   $isPrintHeader = false;
-  $cont=mostrardatos1($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla);
+  $cont=mostrardatos($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla);
   $suma=0;
 for($i=0;$i<count($cont);$i++){
   $monto=number_format(abs($cont[$i]['nothtax']),2);
@@ -288,7 +288,7 @@ for($i=0;$i<count($cont);$i++){
   /*$var = str_replace(",", "", $monto);
   $cont[$i]['ndedamt'] = str_replace(".", ",", trim($var));
   $monto=$cont[$i]['ndedamt'];*/
-  echo $cont[$i]['nombre']."\t".$cont[$i]['cempno']."\t".$cont[$i]['cdeptno']."\t".$cont[$i]['cdeptname']."\t".$cont[$i]['cJobTitlNO']."\t".$cont[$i]['cDesc']."\t".$cont[$i]['cfedid']."\t".$cont[$i]['dcheck']."\t".$cont[$i]['cref']."\t".$monto."\t".$cont[$i]['cplnid']."\t".$cont[$i]['cpayno']."\t".$cont[$i]['cpaycode']."\t".$cont[$i]['ctaxstate']."\t".$cont[$i]['cstatus']."\t".$cont[$i]['cglacct']."\n";
+  echo $cont[$i]['nombre']."\t".$cont[$i]['cempno']."\t".$cont[$i]['cdeptno']."\t".$cont[$i]['cdeptname']."\t".$cont[$i]['cJobTitlNO']."\t".$cont[$i]['cDesc']."\t".$cont[$i]['cfedid']."\t".$cont[$i]['dcheck']."\t".$cont[$i]['cref']."\t".$monto."\t".$cont[$i]['cplnid']."\t".$cont[$i]['cpayno']."\t".$cont[$i]['cpaycode']."\t".$cont[$i]['ctaxstate']."\t".$cont[$i]['cstatus']."\t".$cont[$i]['cwageacc']."\n";
 }
 
 echo "suma:".number_format($suma,2);
@@ -306,7 +306,7 @@ function exportarExcel2($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla){
   header("Content-Disposition: attachment; filename=\"$filename\"");
   
   $isPrintHeader = false;
-  $cont=mostrardatos1($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla);
+  $cont=mostrardatos($mes,$codigos,$opcionBusqueda,$TipoMes,$Tipoplanilla);
   $suma=0;
 for($i=0;$i<count($cont);$i++){
   $monto=number_format(abs($cont[$i]['nothtax']),2);
@@ -319,7 +319,7 @@ for($i=0;$i<count($cont);$i++){
   /*$var = str_replace(",", "", $monto);
   $cont[$i]['ndedamt'] = str_replace(".", ",", trim($var));
   $monto=$cont[$i]['ndedamt'];*/
-  echo $cont[$i]['nombre']."\t".$cont[$i]['cempno']."\t".$cont[$i]['cdeptno']."\t".$cont[$i]['cdeptname']."\t".$cont[$i]['cJobTitlNO']."\t".$cont[$i]['cDesc']."\t".$cont[$i]['cfedid']."\t".$cont[$i]['dcheck']."\t".$cont[$i]['cref']."\t".$monto."\t".$cont[$i]['cplnid']."\t".$cont[$i]['cpayno']."\t".$cont[$i]['cpaycode']."\t".$cont[$i]['ctaxstate']."\t".$cont[$i]['cstatus']."\t".$cont[$i]['cglacct']."\t".$cont[$i]['CuotaPersonal']."\t".$cont[$i]['cuotaPatronal']."\t".$cont[$i]['base_deduccion']."\n";
+  echo $cont[$i]['nombre']."\t".$cont[$i]['cempno']."\t".$cont[$i]['cdeptno']."\t".$cont[$i]['cdeptname']."\t".$cont[$i]['cJobTitlNO']."\t".$cont[$i]['cDesc']."\t".$cont[$i]['cfedid']."\t".$cont[$i]['dcheck']."\t".$cont[$i]['cref']."\t".$monto."\t".$cont[$i]['cplnid']."\t".$cont[$i]['cpayno']."\t".$cont[$i]['cpaycode']."\t".$cont[$i]['ctaxstate']."\t".$cont[$i]['cstatus']."\t".$cont[$i]['cwageacc']."\t".$cont[$i]['CuotaPersonal']."\t".$cont[$i]['cuotaPatronal']."\t".$cont[$i]['base_deduccion']."\n";
 }
 
 echo "suma:".number_format($suma,2);
