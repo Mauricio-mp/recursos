@@ -6,7 +6,7 @@ function Mostrardias($periodoseleccionar,$identidad) {
   $arr=[];
     ConexionSQLRecursosHumanos();
     
-    $sql=mssql_query("SELECT * from dbo.PR_Permisos WHERE cPeriodo IN($periodoseleccionar) and cPersonaId ='$identidad'");
+    $sql=mssql_query("SELECT * from dbo.PR_Permisos WHERE cPeriodo IN($periodoseleccionar) and cPersonaId ='$identidad' and Estado=1");
 while($ejecutar=mssql_fetch_array($sql)){
     $mensaje="Dias Calendarios";
     if($ejecutar['bDiasHabiles']==1){
