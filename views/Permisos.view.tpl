@@ -472,6 +472,7 @@
                                                                 <div class="row form-group">
                                                                     <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Periodo</label></div>
                                                                     <div class="col-12 col-md-9"> <select id="CbxPeridodo" name="CbxPeridodo" data-placeholder="Seleccione Periodo" multiple class="standardSelect">
+                                                                        <option value="1111 - 1111">Periodo de Pruebas</option>
                                                                         {{foreach Periodo}}
                                                                         <option value="{{periodo}}">{{periodo}}</option>
                                                                         {{endfor Periodo}}
@@ -485,6 +486,7 @@
                                                                     <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Jefes</label></div>
                                                                     <div class="col-12 col-md-9"><select name="jefes" id="jefes" class="form-control">
                                                                         <option value="0"  >Selecione un jefe</option>
+                                                                       
                                                                         {{foreach Nombre_Firma}}
                                                                         <option>{{nombrecompleto}}</option>
                                                                         {{endfor Nombre_Firma}}  

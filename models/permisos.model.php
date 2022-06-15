@@ -12,6 +12,9 @@ while($ejecutar=mssql_fetch_array($sql)){
     if($ejecutar['bDiasHabiles']==1){
         $mensaje="Dias Habiles";
     }
+    if($ejecutar['cPeriodo']=="1111 - 1111"){
+        $ejecutar['cPeriodo']="PERIODO DE PRUEBAS";
+    }
 
     $ejecutar['letras']=$ejecutar['iDisponibilidad']."\t(".convertir(ABS($ejecutar['iDisponibilidad'])).")\t".$mensaje;
     $arr[]=$ejecutar;
